@@ -1,0 +1,3885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quisitive — Enterprise Technology Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+:root {
+  --bg: #0D0D0D;
+  --bg-2: #111111;
+  --bg-card: #161616;
+  --green: #59AD4B;
+  --green-light: #88ff2a;
+  --green-glow: rgba(89,173,75,0.3);
+  --white: #ffffff;
+  --gray-400: rgba(255,255,255,0.6);
+  --gray-600: rgba(255,255,255,0.3);
+  --border: rgba(255,255,255,0.13);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow-green: 0 8px 32px rgba(89,173,75,0.25);
+  --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+  --transition-smooth: 0.4s cubic-bezier(0.4,0,0.2,1);
+  --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  
+  /* Mobile-first spacing */
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+}
+
+html { 
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Manrope', sans-serif;
+  background: var(--bg);
+  color: var(--white);
+  line-height: 1.6;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { 
+  text-decoration: none; 
+  color: inherit;
+  transition: var(--transition);
+}
+
+ul { list-style: none; }
+
+img { 
+  max-width: 100%; 
+  height: auto;
+  display: block;
+}
+
+/* Mobile-first container */
+.container { 
+  width: 100%;
+  max-width: 1200px; 
+  margin: 0 auto; 
+  padding: 0 var(--spacing-md);
+}
+
+.section { 
+  padding: var(--spacing-2xl) 0;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Smooth transitions for all interactive elements */
+button, a, input, select, textarea {
+  transition: var(--transition);
+}
+
+button:focus, a:focus, input:focus, select:focus, textarea:focus {
+  outline: 2px solid var(--green-light);
+  outline-offset: 2px;
+}
+
+/* Prevent horizontal scroll */
+* {
+  max-width: 100%;
+}
+
+/* Improved scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--green);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--green-light);
+}
+
+/* ===== BUTTONS (Mobile-First) ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all var(--transition-smooth);
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  min-height: 44px;
+  width: 100%;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-primary {
+  background: var(--green);
+  color: var(--white);
+  box-shadow: var(--shadow-green);
+}
+
+.btn-primary:hover {
+  background: var(--green-light);
+  color: #0D0D0D;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(89,173,75,0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  border: 1.5px solid rgba(255,255,255,0.25);
+}
+
+.btn-outline:hover {
+  border-color: var(--green-light);
+  color: var(--green-light);
+  background: rgba(89,173,75,0.1);
+  transform: translateY(-2px);
+}
+
+.btn-lg { 
+  padding: 14px 28px; 
+  font-size: 1rem; 
+}
+
+/* Desktop: inline buttons */
+@media (min-width: 769px) {
+  .btn {
+    width: auto;
+  }
+}
+
+/* ===== NAVBAR (Mobile-First) ===== */
+.navbar {
+  position: fixed;
+  top: 0; 
+  left: 0; 
+  right: 0;
+  z-index: 1000;
+  padding: var(--spacing-md) 0;
+  transition: all var(--transition-smooth);
+  background: transparent;
+}
+
+.navbar.scrolled {
+  background: rgba(13,13,13,0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: var(--spacing-sm) 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-weight: 700;
+  transition: var(--transition);
+  z-index: 1002;
+}
+
+.nav-logo:hover {
+  transform: scale(1.05);
+}
+
+.logo-img {
+  width: 130px;
+  max-height: 36px;
+  object-fit: contain;
+  display: block;
+  transition: var(--transition);
+}
+
+/* Mobile: Hide desktop nav by default */
+.nav-links { 
+  display: none;
+}
+
+.nav-cta {
+  display: none;
+}
+
+/* Hamburger menu (Mobile) */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: rgba(89,173,75,0.1);
+  border: 1px solid rgba(89,173,75,0.3);
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 10px;
+  width: 44px;
+  height: 44px;
+  z-index: 1002;
+  transition: all var(--transition-smooth);
+}
+
+.hamburger:hover {
+  background: rgba(89,173,75,0.2);
+  border-color: var(--green-light);
+  transform: scale(1.05);
+}
+
+.hamburger span {
+  display: block;
+  width: 24px; 
+  height: 2px;
+  background: var(--green-light);
+  border-radius: 2px;
+  transition: all var(--transition-smooth);
+}
+
+.hamburger.open {
+  background: rgba(89,173,75,0.2);
+  border-color: var(--green-light);
+}
+
+.hamburger.open span:nth-child(1) { 
+  transform: translateY(7px) rotate(45deg); 
+}
+
+.hamburger.open span:nth-child(2) { 
+  opacity: 0; 
+  transform: translateX(-20px);
+}
+
+.hamburger.open span:nth-child(3) { 
+  transform: translateY(-7px) rotate(-45deg); 
+}
+
+/* Mobile menu overlay */
+.nav-links.open {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0;
+  background: rgba(13,13,13,0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  z-index: 1001;
+  padding: 80px var(--spacing-lg) var(--spacing-lg);
+  overflow-y: auto;
+  animation: slideInRight 0.3s ease;
+}
+
+@keyframes slideInRight {
+  from { 
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to { 
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.nav-link {
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--gray-400);
+  transition: all var(--transition-smooth);
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-link:hover, 
+.nav-link.active {
+  color: var(--white);
+  background: rgba(89,173,75,0.15);
+  border-color: var(--green-light);
+}
+
+/* Dropdown (Mobile) */
+.dropdown {
+  width: 100%;
+}
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--gray-400);
+  transition: all var(--transition-smooth);
+  width: 100%;
+  font-family: 'Manrope', sans-serif;
+  border-bottom: 1px solid var(--border);
+}
+
+.dropdown-toggle:hover,
+.dropdown-toggle.active {
+  color: var(--white);
+  background: rgba(89,173,75,0.15);
+  border-color: var(--green-light);
+}
+
+.dropdown-toggle::after {
+  content: '';
+  width: 0; 
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid currentColor;
+  transition: var(--transition-smooth);
+  margin-left: auto;
+}
+
+.dropdown-toggle.active::after {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  display: none;
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+  margin-top: var(--spacing-xs);
+  overflow: hidden;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+  }
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-item {
+  display: block;
+  padding: var(--spacing-md) var(--spacing-lg);
+  color: var(--gray-400);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all var(--transition-smooth);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  text-align: center;
+}
+
+.dropdown-item:last-child { 
+  border-bottom: none; 
+}
+
+.dropdown-item:hover {
+  color: var(--white);
+  background: rgba(89,173,75,0.1);
+  padding-left: calc(var(--spacing-lg) + 8px);
+}
+
+/* Desktop: Show horizontal nav (769px and up) */
+@media (min-width: 769px) {
+  .logo-img {
+    width: 160px;
+    max-height: 44px;
+  }
+  
+  .hamburger {
+    display: none;
+  }
+  
+  .nav-container {
+    gap: var(--spacing-xl);
+  }
+  
+  .nav-links {
+    display: flex;
+    flex-direction: row;
+    position: static;
+    background: transparent;
+    backdrop-filter: none;
+    padding: 0;
+    gap: var(--spacing-xs);
+    animation: none;
+    align-items: center;
+    overflow: visible;
+  }
+  
+  .nav-link {
+    width: auto;
+    font-size: 0.9rem;
+    padding: var(--spacing-xs) 14px;
+    border-bottom: none;
+  }
+  
+  .nav-link:hover,
+  .nav-link.active {
+    transform: translateY(-2px);
+  }
+  
+  /* Dropdown (Desktop) */
+  .dropdown {
+    position: relative;
+    width: auto;
+  }
+  
+  .dropdown-toggle {
+    width: auto;
+    font-size: 0.9rem;
+    padding: var(--spacing-xs) 14px;
+    border-bottom: none;
+    justify-content: flex-start;
+  }
+  
+  .dropdown-toggle::after {
+    margin-left: 4px;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid currentColor;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    min-width: 240px;
+    width: auto;
+    margin-top: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all var(--transition-smooth);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    animation: none;
+  }
+  
+  .dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .dropdown-item {
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 0.875rem;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .dropdown-item:hover {
+    padding-left: 20px;
+  }
+  
+  .nav-cta {
+    display: inline-flex;
+    padding: 10px 20px;
+    font-size: 0.875rem;
+    width: auto;
+  }
+}
+
+/* ===== NAVBAR RESPONSIVE FIX ===== */
+
+/* FIX 1: Body scroll lock CSS class */
+body.nav-open {
+  overflow: hidden !important;
+  position: fixed !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* FIX 2: Pin navbar, logo, and hamburger to top */
+.navbar {
+  z-index: 1004 !important;
+  position: fixed !important;
+}
+
+.hamburger {
+  z-index: 1005 !important;
+  position: relative !important;
+}
+
+.nav-logo {
+  z-index: 1005 !important;
+  position: relative !important;
+}
+
+/* FIX 2 & FIX 3 & FIX 4: Overlay positioning and appearance */
+.nav-links.open {
+  z-index: 1003 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  padding-top: 70px !important;
+  background: rgba(13, 13, 13, 0.99) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  overscroll-behavior: contain !important;
+}
+
+/* Legacy support for old class name */
+body.menu-open {
+  overflow: hidden !important;
+  position: fixed;
+  width: 100%;
+}
+
+/* PROBLEM 3: Force hide desktop nav on mobile/tablet */
+@media (max-width: 768px) {
+  .nav-links:not(.open) {
+    display: none !important;
+  }
+  
+  .nav-cta {
+    display: none !important;
+  }
+  
+  .hamburger {
+    display: flex !important;
+  }
+}
+
+/* PROBLEM 4: Mobile menu link tap area */
+@media (max-width: 768px) {
+  .nav-links.open .nav-link {
+    min-height: 52px !important;
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .nav-links.open .dropdown-toggle {
+    min-height: 52px !important;
+    width: 100% !important;
+  }
+}
+
+/* ROOT CAUSE 3 FIX: Dropdown inside mobile menu - no absolute positioning */
+@media (max-width: 768px) {
+  .dropdown-menu {
+    position: static !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    min-width: 100% !important;
+    display: none;
+  }
+  
+  .dropdown-menu.show {
+    display: block !important;
+  }
+}
+
+/* ===== DROPDOWN (DESKTOP ONLY) ===== */
+/* ROOT CAUSE 1 FIX: Wrap in desktop media query to prevent mobile override */
+@media (min-width: 769px) {
+  .dropdown { 
+    position: relative;
+  }
+  
+  .dropdown-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--gray-400);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .dropdown-toggle:hover, 
+  .dropdown-toggle.active {
+    color: var(--white);
+    background: rgba(255,255,255,0.06);
+  }
+  
+  .dropdown-toggle::after {
+    content: '';
+    width: 0; 
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid var(--gray-400);
+    transition: var(--transition);
+  }
+  
+  .dropdown-toggle.active::after {
+    border-top-color: var(--white);
+    transform: rotate(180deg);
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 4px); /* Reduced gap from 8px to 4px */
+    left: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    min-width: 240px; /* Increased from 220px */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease; /* Faster transition */
+    z-index: 1001;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    pointer-events: none; /* Prevent interaction when hidden */
+  }
+  
+  .dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto; /* Enable interaction when visible */
+  }
+  
+  .dropdown-item {
+    display: block;
+    padding: 14px 18px; /* Increased padding for easier hovering */
+    color: var(--gray-400);
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: var(--transition);
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .dropdown-item:last-child { 
+    border-bottom: none; 
+  }
+  
+  .dropdown-item:hover {
+    color: var(--white);
+    background: rgba(89,173,75,0.1);
+    padding-left: 22px; /* Increased from 20px */
+  }
+}
+  
+  .dropdown-item:hover {
+    color: var(--white);
+    background: rgba(89,173,75,0.1);
+  }
+}
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 120px 0 80px;
+  width: 100%;
+}
+.hero-bg { 
+  position: absolute; 
+  inset: 0; 
+  pointer-events: none;
+  overflow: hidden;
+}
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  will-change: transform;
+}
+.orb-1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, #59AD4B, transparent 70%);
+  top: -200px; right: -100px;
+}
+.orb-2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, #2d7a1f, transparent 70%);
+  bottom: -100px; left: -100px;
+}
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+}
+.hero-content { 
+  position: relative; 
+  z-index: 1; 
+  max-width: 800px;
+  width: 100%;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(89,173,75,0.15);
+  border: 1px solid rgba(89,173,75,0.4);
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--green-light);
+  margin-bottom: 28px;
+}
+.badge-dot {
+  width: 6px; height: 6px;
+  background: var(--green-light);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+.hero-heading {
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+}
+.hero-highlight {
+  display: inline-block;
+  color: var(--green-light);
+  font-style: italic;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+.gradient-text {
+  background: linear-gradient(135deg, #88ff2a, #59AD4B, #88ff2a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: 1.15rem;
+  color: var(--gray-400);
+  line-height: 1.7;
+  margin-bottom: 40px;
+  max-width: 600px;
+}
+.br-desktop { display: block; }
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 56px; }
+.hero-trust {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.8rem;
+  color: var(--gray-600);
+}
+.trust-logos { display: flex; align-items: center; gap: 12px; }
+.trust-item { color: var(--gray-400); font-weight: 500; }
+.trust-divider { color: var(--gray-600); }
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.scroll-line {
+  width: 1px; height: 60px;
+  background: linear-gradient(to bottom, transparent, var(--green-light));
+  margin: 0 auto;
+  animation: scrollLine 2s ease-in-out infinite;
+}
+@keyframes scrollLine {
+  0% { opacity: 0; transform: scaleY(0); transform-origin: top; }
+  50% { opacity: 1; transform: scaleY(1); }
+  100% { opacity: 0; transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ===== SECTION HEADERS (Mobile-First) ===== */
+.section-header { 
+  text-align: center; 
+  max-width: 640px; 
+  margin: 0 auto var(--spacing-xl);
+  animation: fadeInUp 0.6s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section-label {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green-light);
+  margin-bottom: var(--spacing-sm);
+  padding: 4px 12px;
+  background: rgba(89,173,75,0.1);
+  border-radius: 100px;
+  border: 1px solid rgba(89,173,75,0.3);
+  transition: var(--transition);
+}
+
+.section-label:hover {
+  background: rgba(89,173,75,0.2);
+  transform: scale(1.05);
+}
+
+.section-title {
+  font-size: clamp(1.5rem, 4vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--spacing-md);
+  background: linear-gradient(135deg, var(--white), var(--gray-400));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-sub { 
+  color: var(--gray-400); 
+  font-size: clamp(0.9rem, 2vw, 1rem); 
+  line-height: 1.7;
+}
+
+/* Tablet and up */
+@media (min-width: 769px) {
+  .section-header {
+    margin-bottom: var(--spacing-3xl);
+  }
+  
+  .section-label {
+    font-size: 0.75rem;
+    padding: 6px 16px;
+  }
+}
+
+/* ===== SERVICES ===== */
+.services { background: var(--bg); }
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; justify-items: center; }
+.service-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 18px;
+  position: relative;
+  transition: var(--transition);
+  overflow: hidden;
+  max-width: 300px;
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(89,173,75,0.05), transparent);
+  opacity: 0;
+  transition: var(--transition);
+  pointer-events: none;
+}
+.service-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(89,173,75,0.4);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.35), 0 0 0 1px rgba(89,173,75,0.2);
+}
+.service-card:hover::before { opacity: 1; }
+.service-card--featured {
+  border-color: rgba(89,173,75,0.5);
+  background: linear-gradient(135deg, rgba(89,173,75,0.12), var(--bg-card));
+}
+.card-featured-badge {
+  position: absolute;
+  top: 20px; right: 20px;
+  background: var(--green);
+  color: var(--white);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 100px;
+  letter-spacing: 0.05em;
+}
+.card-icon {
+  width: 40px; height: 40px;
+  background: rgba(89,173,75,0.15);
+  border: 1px solid rgba(89,173,75,0.3);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+.card-icon svg { width: 20px; height: 20px; color: var(--green-light); }
+.card-tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green-light);
+  margin-bottom: 8px;
+}
+.card-title { font-size: 1rem; font-weight: 700; margin-bottom: 14px; letter-spacing: -0.01em; }
+.card-desc { 
+  color: var(--gray-400); 
+  font-size: 0.8rem; 
+  line-height: 1.6; 
+  margin-bottom: 0;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.4s ease, margin-bottom 0.4s ease;
+}
+.service-card.expanded .card-desc {
+  max-height: 200px;
+  opacity: 1;
+  margin-bottom: 14px;
+}
+.card-features { 
+  margin-bottom: 0;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.4s ease, margin-bottom 0.4s ease;
+}
+.service-card.expanded .card-features {
+  max-height: 300px;
+  opacity: 1;
+  margin-bottom: 16px;
+}
+.card-features li {
+  font-size: 0.78rem;
+  color: var(--gray-400);
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.card-features li::before {
+  content: '';
+  width: 4px; height: 4px;
+  background: var(--green-light);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.card-toggle,
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--green-light);
+  background: rgba(89,173,75,0.1);
+  border: 1px solid rgba(89,173,75,0.3);
+  border-radius: 6px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: 'Manrope', sans-serif;
+  position: relative;
+  z-index: 10;
+}
+.card-toggle:hover,
+.card-link:hover { 
+  color: var(--white);
+  background: rgba(89,173,75,0.2);
+  border-color: var(--green-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(89,173,75,0.3);
+}
+.card-toggle:active,
+.card-link:active {
+  transform: translateY(0);
+}
+.card-toggle svg,
+.card-link svg { 
+  width: 16px; 
+  height: 16px; 
+  transition: var(--transition); 
+}
+.card-toggle:hover svg,
+.card-link:hover svg { 
+  transform: translateX(4px); 
+}
+.card-toggle.open {
+  background: rgba(89,173,75,0.15);
+  border-color: var(--green-light);
+}
+.card-toggle.open svg { 
+  transform: rotate(90deg); 
+}
+.card-details {
+  max-height: 0;
+  opacity: 0;
+  visibility: hidden;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.4s ease, visibility 0.4s ease, padding-top 0.4s ease, margin-top 0.4s ease;
+}
+.service-card.expanded .card-details {
+  max-height: 400px;
+  opacity: 1;
+  visibility: visible;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+.card-details p {
+  color: var(--gray-400);
+  font-size: 0.8rem;
+  line-height: 1.65;
+  margin-bottom: 12px;
+}
+.card-details ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.card-details li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: var(--gray-400);
+  font-size: 0.78rem;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+.card-details li::before {
+  content: '';
+  width: 4px; height: 4px;
+  background: var(--green-light);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+/* ===== STATS ===== */
+.stats {
+  padding: 60px 0;
+  background: linear-gradient(135deg, rgba(89,173,75,0.08), rgba(45,122,31,0.05));
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.stats-bar { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.stat-item { text-align: center; flex: 1; }
+.stat-number {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #ffffff, #88ff2a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-suffix {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff, #88ff2a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-label { display: block; font-size: 0.85rem; color: var(--gray-400); margin-top: 6px; font-weight: 500; }
+.stat-divider { width: 1px; height: 60px; background: var(--border); flex-shrink: 0; }
+
+/* ===== ABOUT US ===== */
+.about-us { background: var(--bg-2); }
+.about-us .section-header { margin-bottom: 48px; }
+.about-content { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
+.about-section { margin-bottom: 48px; }
+.about-section h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+.about-section p {
+  color: var(--gray-400);
+  line-height: 1.7;
+  margin-bottom: 16px;
+  max-width: 800px;
+}
+.certifications-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+.certifications-list li {
+  padding: 16px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--gray-400);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  margin-top: 32px;
+  max-width: 100%;
+  align-items: stretch; /* FIX 1: Equal height cards per row */
+}
+.certification-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  text-align: center;
+  transition: var(--transition);
+  min-width: 0;
+  width: 100%;
+  display: flex; /* FIX 1: Flex column layout */
+  flex-direction: column;
+  height: 100%;
+}
+.certification-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(89,173,75,0.4);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+}
+.certification-card img {
+  width: 100%;
+  max-width: 100%;
+  height: 200px; /* FIX 3: Fixed equal height for all images */
+  object-fit: contain;
+  object-position: center;
+  border-radius: var(--radius-sm);
+  margin-bottom: 20px;
+  transition: var(--transition);
+  cursor: pointer;
+}
+.certification-card img:hover {
+  transform: scale(1.02);
+}
+.certification-card h4 {
+  color: var(--white);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+.certification-card .cert-subtitle {
+  color: var(--green-light);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 20px;
+  flex: 1; /* FIX 1: Push button to bottom */
+}
+.cert-details-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  background: rgba(89,173,75,0.1);
+  border: 1px solid rgba(89,173,75,0.3);
+  border-radius: 6px;
+  color: var(--green-light);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: 'Manrope', sans-serif;
+  margin-bottom: 16px;
+  margin-top: auto; /* FIX 1: Always at bottom */
+}
+.cert-details-toggle:hover {
+  background: rgba(89,173,75,0.2);
+  border-color: var(--green-light);
+  transform: translateY(-2px);
+}
+.cert-details-toggle::after {
+  content: '▼';
+  font-size: 0.7rem;
+  transition: var(--transition);
+}
+.cert-details-toggle.active::after {
+  transform: rotate(180deg);
+}
+.cert-details-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.4s ease, margin-top 0.4s ease;
+  text-align: left;
+}
+.cert-details-content.show {
+  max-height: 1000px;
+  opacity: 1;
+  margin-top: 16px;
+}
+.cert-details-content p {
+  color: var(--gray-400);
+  font-size: 0.88rem;
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+.cert-details-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* ===== CERTIFICATE MODAL ===== */
+.certificate-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  padding: 40px 20px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+}
+.certificate-modal.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.modal-content {
+  max-width: 90%;
+  max-height: 85vh;
+  width: auto;
+  height: auto;
+  border-radius: var(--radius);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  animation: zoomIn 0.3s ease;
+}
+@keyframes zoomIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: var(--white);
+  font-size: 48px;
+  font-weight: 300;
+  cursor: pointer;
+  transition: var(--transition);
+  z-index: 10000;
+}
+.modal-close:hover {
+  color: var(--green-light);
+  transform: rotate(90deg);
+}
+.modal-caption {
+  margin-top: 20px;
+  text-align: center;
+  color: var(--white);
+  font-size: 1.1rem;
+  font-weight: 500;
+  max-width: 700px;
+}
+
+/* ===== LEADERSHIP ===== */
+.leadership-section h3 { text-align: center; margin-bottom: 32px; }
+.leadership-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  align-items: stretch; /* FIX 2: Equal height cards per row */
+}
+.leader-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  transition: var(--transition);
+  min-width: 0;
+  width: 100%;
+  display: flex; /* FIX 2: Flex column layout */
+  flex-direction: column;
+  height: 100%;
+}
+.leader-card:hover {
+  border-color: rgba(89,173,75,0.4);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-green);
+}
+.leader-card h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.leader-title {
+  font-size: 0.9rem;
+  color: var(--green-light);
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.leader-card p {
+  color: var(--gray-400);
+  line-height: 1.6;
+  margin-bottom: 16px;
+  flex: 1; /* FIX 2: Push list to bottom */
+}
+.leader-expertise {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: auto; /* FIX 2: Always at bottom */
+}
+.leader-expertise li {
+  color: var(--gray-400);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border);
+}
+.leader-expertise li:last-child { border-bottom: none; }
+
+/* ===== FAQ ===== */
+.faq { background: var(--bg); }
+.faq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 1000px; margin: 0 auto; }
+.faq-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: var(--transition);
+}
+.faq-item:hover { border-color: rgba(89,173,75,0.3); }
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px;
+  cursor: pointer;
+  width: 100%;
+}
+.faq-question h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--white);
+}
+.faq-toggle {
+  background: none;
+  border: none;
+  color: var(--green-light);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.faq-toggle:hover { background: rgba(89,173,75,0.1); }
+.faq-toggle svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+.faq-item.active .faq-toggle svg { transform: rotate(180deg); }
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  padding: 0 24px;
+}
+.faq-item.active .faq-answer {
+  max-height: 200px;
+  padding-bottom: 24px;
+}
+.faq-answer p {
+  color: var(--gray-400);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ===== COMPLIANCE ===== */
+.compliance { background: var(--bg-2); }
+.compliance-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.compliance-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px 24px;
+  text-align: center;
+  transition: var(--transition);
+}
+.compliance-card:hover {
+  border-color: rgba(89,173,75,0.3);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-green);
+}
+.compliance-icon {
+  width: 64px;
+  height: 64px;
+  background: rgba(89,173,75,0.15);
+  border: 1px solid rgba(89,173,75,0.3);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+.compliance-icon svg {
+  width: 28px;
+  height: 28px;
+  color: var(--green-light);
+}
+.compliance-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--white);
+}
+.compliance-card p {
+  color: var(--gray-400);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+/* ===== DATA CENTER ===== */
+.data-center { background: var(--bg); }
+.data-center-content { max-width: 800px; margin: 0 auto; }
+.data-center-services h3,
+.data-center-cta h3 { font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: 16px; }
+.data-center-services ul { list-style: none; padding: 0; }
+.data-center-services li { color: var(--gray-400); line-height: 1.7; margin-bottom: 12px; padding: 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.data-center-cta { text-align: center; margin-top: 48px; }
+.data-center-cta p { color: var(--gray-400); margin-bottom: 24px; }
+.cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+/* ===== CLOUD SOLUTIONS ===== */
+.cloud-solutions { background: var(--bg-2); }
+.cloud-content { max-width: 800px; margin: 0 auto; }
+.cloud-contact-info h3,
+.cloud-services h3 { font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: 16px; }
+.cloud-contact-info ul { list-style: none; padding: 0; }
+.cloud-contact-info li { color: var(--gray-400); line-height: 1.7; margin-bottom: 8px; }
+.cloud-service-item { margin-bottom: 24px; padding: 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); }
+.cloud-service-item h4 { font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+.cloud-service-item p { color: var(--gray-400); line-height: 1.6; }
+
+/* ===== NOC ===== */
+.noc { background: var(--bg); }
+.noc-content { max-width: 800px; margin: 0 auto; }
+.noc-content h3 { font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: 16px; }
+.noc-content p { color: var(--gray-400); line-height: 1.7; margin-bottom: 16px; }
+.noc-differentiators ul,
+.noc-vendor-coverage ul,
+.noc-integrations ul,
+.noc-sla ul,
+.noc-pricing ul { list-style: none; padding: 0; }
+.noc-differentiators li,
+.noc-vendor-coverage li,
+.noc-integrations li,
+.noc-sla li,
+.noc-pricing li { color: var(--gray-400); line-height: 1.7; margin-bottom: 8px; padding-left: 20px; position: relative; }
+.noc-differentiators li::before,
+.noc-vendor-coverage li::before,
+.noc-integrations li::before,
+.noc-sla li::before,
+.noc-pricing li::before { content: '•'; color: var(--green-light); position: absolute; left: 0; }
+.noc-testimonial { text-align: center; margin-top: 32px; padding: 32px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); }
+.noc-testimonial blockquote { font-style: italic; color: var(--gray-400); font-size: 1.1rem; margin: 0; }
+
+/* ===== SOC ===== */
+.soc { background: var(--bg-2); }
+.soc-content { max-width: 800px; margin: 0 auto; }
+.soc-content h3 { font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: 16px; }
+.soc-content h4 { font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 12px; margin-top: 24px; }
+.soc-content p { color: var(--gray-400); line-height: 1.7; margin-bottom: 16px; }
+.soc-dedicated-model ul,
+.soc-threat-intelligence ul,
+.soc-siem ul,
+.soc-sla-accountability ul,
+.soc-pricing ul,
+.soc-industry-specific ul { list-style: none; padding: 0; }
+.soc-dedicated-model li,
+.soc-threat-intelligence li,
+.soc-siem li,
+.soc-sla-accountability li,
+.soc-pricing li,
+.soc-industry-specific li { color: var(--gray-400); line-height: 1.7; margin-bottom: 8px; padding-left: 20px; position: relative; }
+.soc-dedicated-model li::before,
+.soc-threat-intelligence li::before,
+.soc-siem li::before,
+.soc-sla-accountability li::before,
+.soc-pricing li::before,
+.soc-industry-specific li::before { content: '•'; color: var(--green-light); position: absolute; left: 0; }
+
+/* ===== CONTACT ===== */
+.contact { background: var(--bg); }
+
+/* ===== CONNECT WITH US ===== */
+.connect-section {
+  background: linear-gradient(135deg, rgba(89,173,75,0.08), rgba(45,122,31,0.05));
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 80px 0;
+}
+.connect-content {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.connect-title {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  color: var(--white);
+}
+.connect-subtitle {
+  color: var(--gray-400);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 48px;
+}
+.connect-social-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.connect-social-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: var(--transition);
+  min-width: 140px;
+}
+.connect-social-link svg {
+  width: 32px;
+  height: 32px;
+  transition: var(--transition);
+}
+.connect-social-link span {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--gray-400);
+  transition: var(--transition);
+}
+.connect-social-link:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+}
+.connect-social-link.facebook:hover {
+  border-color: #1877F2;
+  background: rgba(24,119,242,0.1);
+}
+.connect-social-link.facebook:hover svg {
+  color: #1877F2;
+}
+.connect-social-link.facebook:hover span {
+  color: #1877F2;
+}
+.connect-social-link.linkedin:hover {
+  border-color: #0A66C2;
+  background: rgba(10,102,194,0.1);
+}
+.connect-social-link.linkedin:hover svg {
+  color: #0A66C2;
+}
+.connect-social-link.linkedin:hover span {
+  color: #0A66C2;
+}
+.connect-social-link.instagram:hover {
+  border-color: #E4405F;
+  background: rgba(228,64,95,0.1);
+}
+.connect-social-link.instagram:hover svg {
+  color: #E4405F;
+}
+.connect-social-link.instagram:hover span {
+  color: #E4405F;
+}
+.connect-social-link.youtube:hover {
+  border-color: #FF0000;
+  background: rgba(255,0,0,0.1);
+}
+.connect-social-link.youtube:hover svg {
+  color: #FF0000;
+}
+.connect-social-link.youtube:hover span {
+  color: #FF0000;
+}
+.connect-social-link.whatsapp:hover {
+  border-color: #25D366;
+  background: rgba(37,211,102,0.1);
+}
+.connect-social-link.whatsapp:hover svg {
+  color: #25D366;
+}
+.connect-social-link.whatsapp:hover span {
+  color: #25D366;
+}
+
+/* ===== FOOTER ===== */
+.contact-form {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 48px;
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+.form-group label { font-size: 0.8rem; font-weight: 600; color: var(--gray-400); letter-spacing: 0.03em; }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 13px 16px;
+  color: var(--white);
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  outline: none;
+  width: 100%;
+}
+.form-group select {
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+.form-group select option { background: var(--bg-card); color: var(--white); }
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: var(--gray-600); }
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--green);
+  background: rgba(89,173,75,0.06);
+  box-shadow: 0 0 0 3px rgba(89,173,75,0.15);
+}
+.form-group textarea { resize: vertical; min-height: 120px; }
+.btn-submit { width: 100%; justify-content: center; position: relative; overflow: hidden; }
+.btn-loader {
+  display: none;
+  width: 18px; height: 18px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: var(--white);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.btn-submit.loading .btn-text { display: none; }
+.btn-submit.loading .btn-loader { display: block; }
+.form-success {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 16px;
+  background: rgba(89,173,75,0.1);
+  border: 1px solid rgba(89,173,75,0.3);
+  border-radius: var(--radius-sm);
+  color: #59AD4B;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.form-success svg { width: 20px; height: 20px; }
+.form-success.show { display: flex; }
+
+/* ===== FOOTER ===== */
+.footer { background: var(--bg-2); border-top: 1px solid var(--border); padding: 72px 0 0; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; padding-bottom: 60px; }
+.footer-brand p {
+  color: var(--gray-400);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  margin: 20px 0 28px;
+  max-width: 280px;
+}
+.social-links { display: flex; gap: 12px; }
+.social-link {
+  width: 38px; height: 38px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-400);
+  transition: var(--transition);
+}
+.social-link svg { width: 16px; height: 16px; }
+.social-link:hover {
+  background: var(--green);
+  border-color: var(--green);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+.footer-col h4 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+.footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+.footer-col a { font-size: 0.875rem; color: var(--gray-400); transition: var(--transition); }
+.footer-col a:hover { color: var(--white); }
+.footer-bottom { border-top: 1px solid var(--border); padding: 24px 0; }
+.footer-bottom-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--gray-600);
+}
+.footer-legal { display: flex; gap: 24px; }
+.footer-legal a { color: var(--gray-600); transition: var(--transition); }
+.footer-legal a:hover { color: var(--white); }
+
+/* ===== SCROLL ANIMATIONS ===== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.services-grid .fade-up:nth-child(2) { transition-delay: 0.1s; }
+.services-grid .fade-up:nth-child(3) { transition-delay: 0.2s; }
+
+/* ===== RESPONSIVE MEDIA QUERIES ===== */
+
+/* ========================================
+   MOBILE (max-width: 480px)
+   ======================================== */
+@media (max-width: 480px) {
+  /* General */
+  .container {
+    padding: 0 16px;
+  }
+  
+  .section {
+    padding: 32px 0;
+  }
+  
+  /* Typography - Fluid scaling with clamp() */
+  .section-title {
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+  }
+  
+  .section-sub {
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+  }
+  
+  .section-label {
+    font-size: 0.65rem;
+  }
+  
+  /* Navbar - Hamburger menu */
+  .hamburger {
+    display: flex !important;
+    min-width: 44px;
+    min-height: 44px;
+  }
+  
+  .nav-links {
+    display: none;
+  }
+  
+  .nav-cta {
+    display: none;
+  }
+  
+  .nav-links.open {
+    display: flex;
+  }
+  
+  /* Hero Section */
+  .hero {
+    padding: 100px 0 60px;
+    min-height: auto;
+  }
+  
+  .hero-heading {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    line-height: 1.1;
+  }
+  
+  .hero-sub {
+    font-size: 0.95rem;
+    margin-bottom: 28px;
+  }
+  
+  .hero-actions {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+  
+  .hero-actions .btn {
+    width: 100%;
+  }
+  
+  .hero-trust {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+  
+  .trust-logos {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  /* Stats Section - Single column */
+  .stats-bar {
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .stat-divider {
+    display: none;
+  }
+  
+  .stat-number {
+    font-size: clamp(2.5rem, 8vw, 3.5rem);
+  }
+  
+  /* Services Section - Single column */
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .service-card {
+    max-width: 100%;
+  }
+  
+  .card-toggle,
+  .card-link {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 18px;
+  }
+  
+  /* Certifications - Single column with better spacing */
+  .certifications-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    max-width: 100%;
+  }
+  
+  .certification-card {
+    padding: 24px 20px;
+    max-width: 100%;
+  }
+  
+  .certification-card img {
+    height: 200px;
+  }
+  
+  /* Certificate Modal - Full screen */
+  .certificate-modal {
+    padding: 20px 10px;
+  }
+  
+  .modal-content {
+    max-width: 95%;
+    max-height: 80vh;
+  }
+  
+  .modal-close {
+    top: 10px;
+    right: 15px;
+    font-size: 36px;
+  }
+  
+  /* FAQ Section - Single column */
+  .faq-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .faq-question {
+    padding: 18px;
+  }
+  
+  .faq-question h3 {
+    font-size: 0.95rem;
+  }
+  
+  .faq-toggle {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  
+  /* Contact Form - Stacked */
+  .contact-form {
+    padding: 28px 20px;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    min-height: 44px;
+  }
+  
+  .btn-submit {
+    width: 100%;
+    min-height: 48px;
+  }
+  
+  /* Footer - Stacked */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    text-align: center;
+  }
+  
+  .footer-brand p {
+    max-width: 100%;
+  }
+  
+  .social-links {
+    justify-content: center;
+  }
+  
+  .footer-bottom-inner {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+  
+  .footer-legal {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  /* Compliance - Single column */
+  .compliance-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  /* Leadership - Single column */
+  .leadership-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  /* Connect Section */
+  .connect-section {
+    padding: 48px 0;
+  }
+  
+  .connect-social-links {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .connect-social-link {
+    width: 100%;
+    min-height: 44px;
+  }
+}
+
+/* ========================================
+   TABLET (481px - 768px)
+   ======================================== */
+@media (min-width: 481px) and (max-width: 768px) {
+  /* General */
+  .container {
+    padding: 0 20px;
+  }
+  
+  .section {
+    padding: 48px 0;
+  }
+  
+  /* Typography */
+  .section-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+  }
+  
+  .section-sub {
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+  }
+  
+  /* Navbar - Still hamburger */
+  .hamburger {
+    display: flex !important;
+    min-width: 44px;
+    min-height: 44px;
+  }
+  
+  .nav-links {
+    display: none;
+  }
+  
+  .nav-cta {
+    display: none;
+  }
+  
+  .nav-links.open {
+    display: flex;
+  }
+  
+  /* Hero Section */
+  .hero {
+    padding: 120px 0 70px;
+  }
+  
+  .hero-heading {
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+  }
+  
+  .hero-actions {
+    flex-direction: row;
+    gap: 16px;
+  }
+  
+  .hero-actions .btn {
+    width: auto;
+    flex: 1;
+  }
+  
+  /* Stats Section - 2 columns */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  
+  .stat-divider {
+    display: none;
+  }
+  
+  /* Services Section - 2 columns */
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  /* Certifications - 2 columns with better spacing */
+  .certifications-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    max-width: 100%;
+  }
+  
+  .certification-card {
+    padding: 28px 24px;
+  }
+  
+  .certification-card img {
+    height: 180px;
+  }
+  
+  /* FAQ - 2 columns */
+  .faq-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  /* Contact Form - 2 columns for name/email */
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  
+  /* Footer - 2 columns */
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+  
+  /* Compliance - 2 columns */
+  .compliance-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  /* Leadership - 2 columns */
+  .leadership-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+  
+  /* Connect Section */
+  .connect-social-links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  
+  .connect-social-link {
+    flex: 1 1 calc(50% - 8px);
+    min-width: 140px;
+  }
+}
+
+/* ========================================
+   SMALL DESKTOP (769px - 1024px)
+   ======================================== */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* General */
+  .container {
+    padding: 0 24px;
+  }
+  
+  .section {
+    padding: 64px 0;
+  }
+  
+  /* Typography */
+  .section-title {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+  }
+  
+  /* Navbar - Horizontal */
+  .hamburger {
+    display: none !important;
+  }
+  
+  .nav-links {
+    display: flex !important;
+    flex-direction: row;
+    position: static;
+    background: transparent;
+    backdrop-filter: none;
+    padding: 0;
+    gap: 8px;
+    animation: none;
+    align-items: center;
+    overflow: visible;
+  }
+  
+  .nav-link {
+    width: auto;
+    font-size: 0.85rem;
+    padding: 8px 12px;
+    border-bottom: none;
+  }
+  
+  .dropdown {
+    position: relative;
+    width: auto;
+  }
+  
+  .dropdown-toggle {
+    width: auto;
+    font-size: 0.85rem;
+    padding: 8px 12px;
+    border-bottom: none;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    min-width: 220px;
+    animation: none;
+  }
+  
+  .nav-cta {
+    display: inline-flex !important;
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    width: auto;
+  }
+  
+  /* Hero Section */
+  .hero {
+    padding: 140px 0 80px;
+  }
+  
+  .hero-heading {
+    font-size: clamp(3rem, 6vw, 4.5rem);
+  }
+  
+  .hero-actions .btn {
+    width: auto;
+  }
+  
+  /* Stats Section - 4 columns */
+  .stats-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .stat-divider {
+    display: block;
+  }
+  
+  /* Services Section - 3 columns */
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  /* Certifications - 2 columns on small desktop/tablet */
+  .certifications-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    max-width: 100%;
+  }
+  
+  .certification-card {
+    padding: 32px 28px;
+  }
+  
+  .certification-card img {
+    height: 200px;
+  }
+  
+  /* FAQ - 2 columns */
+  .faq-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  
+  /* Contact Form - 2 columns */
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  /* Footer - 4 columns */
+  .footer-grid {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+  }
+  
+  /* Compliance - 3 columns */
+  .compliance-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  
+  /* Leadership - 2 columns */
+  .leadership-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+  
+  /* Connect Section */
+  .connect-social-links {
+    flex-direction: row;
+    gap: 16px;
+  }
+  
+  .connect-social-link {
+    flex: 1;
+    min-width: 120px;
+  }
+}
+
+/* ========================================
+   LARGE DESKTOP (1025px and above)
+   ======================================== */
+@media (min-width: 1025px) {
+  /* General */
+  .container {
+    padding: 0 32px;
+  }
+  
+  .section {
+    padding: 80px 0;
+  }
+  
+  /* Typography */
+  .section-title {
+    font-size: clamp(2.2rem, 4vw, 2.8rem);
+  }
+  
+  .section-sub {
+    font-size: clamp(0.95rem, 1.5vw, 1rem);
+  }
+  
+  /* Navbar - Full horizontal */
+  .hamburger {
+    display: none !important;
+  }
+  
+  .nav-links {
+    display: flex !important;
+    flex-direction: row;
+    position: static;
+    background: transparent;
+    backdrop-filter: none;
+    padding: 0;
+    gap: 12px;
+    animation: none;
+    align-items: center;
+    overflow: visible;
+  }
+  
+  .nav-link {
+    width: auto;
+    font-size: 0.9rem;
+    padding: 10px 16px;
+    border-bottom: none;
+  }
+  
+  .nav-link:hover,
+  .nav-link.active {
+    transform: translateY(-2px);
+  }
+  
+  .dropdown {
+    position: relative;
+    width: auto;
+  }
+  
+  .dropdown-toggle {
+    width: auto;
+    font-size: 0.9rem;
+    padding: 10px 16px;
+    border-bottom: none;
+    justify-content: flex-start;
+  }
+  
+  .dropdown-toggle::after {
+    margin-left: 6px;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    min-width: 240px;
+    width: auto;
+    margin-top: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all var(--transition-smooth);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    animation: none;
+  }
+  
+  .dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .dropdown-item {
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 0.875rem;
+  }
+  
+  .nav-cta {
+    display: inline-flex !important;
+    padding: 10px 24px;
+    font-size: 0.9rem;
+    width: auto;
+  }
+  
+  /* Hero Section */
+  .hero {
+    min-height: 100vh;
+    padding: 160px 0 100px;
+  }
+  
+  .hero-heading {
+    font-size: clamp(3.5rem, 6vw, 5rem);
+  }
+  
+  .hero-sub {
+    font-size: 1.15rem;
+  }
+  
+  .hero-actions {
+    gap: 20px;
+  }
+  
+  .hero-actions .btn {
+    width: auto;
+  }
+  
+  /* Stats Section - 4 columns */
+  .stats-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 32px;
+  }
+  
+  .stat-divider {
+    display: block;
+  }
+  
+  /* Services Section - 3 columns */
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  
+  .service-card {
+    padding: 28px 24px;
+  }
+  
+  /* Certifications - 4 columns with optimal spacing */
+  .certifications-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 36px;
+    max-width: 100%;
+  }
+  
+  .certification-card {
+    padding: 36px 32px;
+  }
+  
+  /* FAQ - 2 columns */
+  .faq-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+  
+  /* Contact Form - 2 columns */
+  .contact-form {
+    padding: 56px;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  
+  /* Footer - 4 columns */
+  .footer-grid {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+  }
+  
+  .footer-bottom-inner {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .footer-legal {
+    flex-direction: row;
+    gap: 24px;
+  }
+  
+  /* Compliance - 3 columns */
+  .compliance-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  
+  /* Leadership - 3 columns */
+  .leadership-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+  }
+  
+  /* Connect Section */
+  .connect-section {
+    padding: 100px 0;
+  }
+  
+  .connect-social-links {
+    flex-direction: row;
+    gap: 20px;
+  }
+  
+  .connect-social-link {
+    flex: 1;
+    padding: 28px 36px;
+    min-width: 150px;
+  }
+}
+
+/* ========================================
+   MOBILE LANDSCAPE OPTIMIZATION
+   ======================================== */
+@media (max-width: 768px) and (orientation: landscape) {
+  .hero {
+    min-height: auto;
+    padding: 80px 0 50px;
+  }
+  
+  .hero-heading {
+    font-size: 2.2rem;
+  }
+  
+  .section {
+    padding: 40px 0;
+  }
+}
+
+/* ========================================
+   VERY SMALL DEVICES (max-width: 360px)
+   ======================================== */
+@media (max-width: 360px) {
+  .container {
+    padding: 0 12px;
+  }
+  
+  .section {
+    padding: 28px 0;
+  }
+  
+  .hero-heading {
+    font-size: 1.8rem;
+  }
+  
+  .section-title {
+    font-size: 1.4rem;
+  }
+  
+  .btn {
+    padding: 10px 14px;
+    font-size: 0.8rem;
+  }
+  
+  .stat-number {
+    font-size: 2.2rem;
+  }
+  
+  .connect-social-link {
+    padding: 16px 20px;
+  }
+  
+  .faq-question {
+    padding: 14px;
+  }
+  
+  .faq-question h3 {
+    font-size: 0.9rem;
+  }
+}
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo">
+        <img src="qb.png" alt="Quisitive" class="logo-img" />
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li class="dropdown">
+          <button class="nav-link dropdown-toggle" id="servicesDropdown">Services</button>
+          <ul class="dropdown-menu" id="servicesMenu">
+            <li><a href="#data-center" class="dropdown-item">Data Centre Consultancy</a></li>
+            <li><a href="#cloud-solutions" class="dropdown-item">Cloud Services Implementation</a></li>
+            <li><a href="#noc" class="dropdown-item">NOC As A Service</a></li>
+            <li><a href="#soc" class="dropdown-item">SOC As A Service</a></li>
+          </ul>
+        </li>
+        <li><a href="#about-us" class="nav-link">About Us</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+        <li><a href="#compliance" class="nav-link">Compliance</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <a href="#contact" class="btn btn-primary nav-cta">Get Started</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="hero-orb orb-1"></div>
+      <div class="hero-orb orb-2"></div>
+      <div class="hero-grid"></div>
+    </div>
+    <div class="container hero-content">
+      <div class="hero-badge fade-up">
+        <span class="badge-dot"></span>
+        Enterprise Technology Partner
+      </div>
+      <h1 class="hero-heading fade-up">
+        We Secure, Build & Scale Your<br />
+        <span class="hero-highlight">Digital Foundation</span><br />
+        End-to-End.
+      </h1>
+      <p class="hero-sub fade-up">
+        At QUISITIVE BUSINESSES, we understand that every business is unique, which is why we offer a range of flexible IT solutions designed to address your specific challenges and goals.
+      </p>
+      <div class="hero-actions fade-up">
+        <a href="#services" class="btn btn-primary btn-lg">Explore Services</a>
+        <a href="#contact" class="btn btn-outline btn-lg">Talk to an Expert</a>
+      </div>
+      <div class="hero-trust fade-up">
+        <span>Trusted by</span>
+        <div class="trust-logos">
+          <span class="trust-item">Fortune 500</span>
+          <span class="trust-divider">·</span>
+          <span class="trust-item">Healthcare</span>
+          <span class="trust-divider">·</span>
+          <span class="trust-item">Finance</span>
+          <span class="trust-divider">·</span>
+          <span class="trust-item">Government</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator"><div class="scroll-line"></div></div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services section" id="services">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-label">What We Do</span>
+        <h2 class="section-title">Enterprise-Grade Solutions<br />Built for Scale</h2>
+        <p class="section-sub">From strategy to execution, we partner with you at every stage of your digital transformation journey.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card fade-up">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <div class="card-tag">Security</div>
+          <h3 class="card-title">Security Services</h3>
+          <p class="card-desc" aria-hidden="true">Protect your business from evolving cyber threats and ensure compliance with industry regulations with comprehensive security services.</p>
+          <ul class="card-features" aria-hidden="true">
+            <li>Zero Trust Architecture</li>
+            <li>SOC & Threat Monitoring</li>
+            <li>Compliance & Risk Management</li>
+          </ul>
+          <button type="button" class="card-toggle" aria-expanded="false">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+          <div class="card-details" aria-hidden="true">
+            <p>Our security services combine continuous detection, managed response, vulnerability management, and governance so your organization stays resilient against evolving threats.</p>
+            <ul>
+              <li>Endpoint and network threat detection</li>
+              <li>Incident response & remediation support</li>
+              <li>Security program governance</li>
+            </ul>
+          </div>
+        </div>
+        <div class="service-card fade-up">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+          </div>
+          <div class="card-tag">Development</div>
+          <h3 class="card-title">Custom Software Development</h3>
+          <p class="card-desc" aria-hidden="true">Transform your ideas into reality with our custom software development and integration services.</p>
+          <ul class="card-features" aria-hidden="true">
+            <li>Web & Mobile Apps</li>
+            <li>API Integration</li>
+            <li>Legacy System Modernization</li>
+          </ul>
+          <button type="button" class="card-toggle" aria-expanded="false">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+          <div class="card-details" aria-hidden="true">
+            <p>We develop tailored applications and integrations with secure, scalable architecture, continuous delivery, and fast time-to-value for business-critical systems.</p>
+            <ul>
+              <li>Cloud-native application design</li>
+              <li>API-first integrations</li>
+              <li>Modernization of legacy systems</li>
+            </ul>
+          </div>
+        </div>
+        <div class="service-card fade-up">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+          </div>
+          <div class="card-tag">Strategy</div>
+          <h3 class="card-title">IT Consulting & Support</h3>
+          <p class="card-desc" aria-hidden="true">Navigate the complexities of the digital landscape with confidence with our IT consulting and support services.</p>
+          <ul class="card-features" aria-hidden="true">
+            <li>Digital Transformation Roadmaps</li>
+            <li>Technology Assessment & Audit</li>
+            <li>IT Governance Frameworks</li>
+          </ul>
+          <button type="button" class="card-toggle" aria-expanded="false">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+          <div class="card-details" aria-hidden="true">
+            <p>Our consulting and support services align your technology roadmap with business goals, improve operational maturity, and help teams adopt resilient, measurable IT practices.</p>
+            <ul>
+              <li>Strategic technology planning</li>
+              <li>Operational readiness assessments</li>
+              <li>Governance and compliance support</li>
+            </ul>
+          </div>
+        </div>
+        <div class="service-card fade-up">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+          </div>
+          <div class="card-tag">Infrastructure</div>
+          <h3 class="card-title">Network Infrastructure</h3>
+          <p class="card-desc" aria-hidden="true">Build a reliable and secure network infrastructure that supports your business operations and enables seamless connectivity.</p>
+          <ul class="card-features" aria-hidden="true">
+            <li>Network Design & Implementation</li>
+            <li>Wireless Solutions</li>
+            <li>Performance Optimization</li>
+          </ul>
+          <button type="button" class="card-toggle" aria-expanded="false">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+          <div class="card-details" aria-hidden="true">
+            <p>We build resilient network infrastructure with secure connectivity, modern wireless architecture, and performance tuning that supports digital growth and hybrid work.</p>
+            <ul>
+              <li>Secure network topology design</li>
+              <li>Wireless and WAN implementation</li>
+              <li>Ongoing performance tuning</li>
+            </ul>
+          </div>
+        </div>
+        <div class="service-card fade-up">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <div class="card-tag">Managed Services</div>
+          <h3 class="card-title">Managed IT Services</h3>
+          <p class="card-desc" aria-hidden="true">Focus on your core business activities while we take care of your IT needs with our managed IT services.</p>
+          <ul class="card-features" aria-hidden="true">
+            <li>24/7 Monitoring & Support</li>
+            <li>Proactive Maintenance</li>
+            <li>Cost Optimization</li>
+          </ul>
+          <button type="button" class="card-toggle" aria-expanded="false">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+          <div class="card-details" aria-hidden="true">
+            <p>Our managed services take IT burden off your team with continuous monitoring, proactive maintenance, and vendor coordination so systems stay reliable and cost-effective.</p>
+            <ul>
+              <li>24/7 infrastructure monitoring</li>
+              <li>Patch and maintenance management</li>
+              <li>Vendor and asset coordination</li>
+            </ul>
+          </div>
+        </div>
+        <div class="service-card fade-up">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/></svg>
+          </div>
+          <div class="card-tag">Backup & Recovery</div>
+          <h3 class="card-title">Data Backup & Disaster Recovery</h3>
+          <p class="card-desc" aria-hidden="true">Protect your critical business data and ensure business continuity with our data backup and disaster recovery solution.</p>
+          <ul class="card-features" aria-hidden="true">
+            <li>Automated Backups</li>
+            <li>Disaster Recovery Planning</li>
+            <li>Business Continuity</li>
+          </ul>
+          <button type="button" class="card-toggle" aria-expanded="false">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+          <div class="card-details" aria-hidden="true">
+            <p>Protect your most important data with automated backup policies, disaster recovery runbooks, and recovery testing so you can restore systems quickly when it matters most.</p>
+            <ul>
+              <li>Automated backup orchestration</li>
+              <li>Recovery plan testing</li>
+              <li>Rapid restore for critical systems</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats section" id="stats">
+    <div class="container">
+      <div class="stats-bar fade-up">
+        <div class="stat-item">
+          <span class="stat-number" data-target="150">0</span><span class="stat-suffix">+</span>
+          <span class="stat-label">Enterprise Clients</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="50">0</span><span class="stat-suffix">+</span>
+          <span class="stat-label">Expert Consultants</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="98">0</span><span class="stat-suffix">%</span>
+          <span class="stat-label">Client Retention</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="12">0</span><span class="stat-suffix">+</span>
+          <span class="stat-label">Years of Excellence</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT US -->
+  <section class="about-us section" id="about-us">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-label">About Quisitive</span>
+        <h2 class="section-title">Your Trusted Partner<br />in Digital Transformation</h2>
+        <p class="section-sub">Quisitive Businesses is a specialist managed security and IT infrastructure company headquartered in India. We deliver the operational functions that keep enterprises secure, available, and performing — Security Operations Centre services, Network Operations Centre services, Managed Security (MSSP), Data Centre Consultancy, and Cloud Implementation and Execution.</p>
+      </div>
+
+      <div class="about-content fade-up">
+          <div class="about-section">
+            <h3>Company Overview</h3>
+            <p>We are not a software company that sells a monitoring platform. We are not a generalist IT firm that offers security as one item on a long menu. We are a specialist operations company — one that takes on the ongoing, daily responsibility for the detection, response, management, and reporting functions that enterprise IT environments require to remain secure and continuously available.</p>
+          </div>
+
+          <div class="about-section">
+            <h3>Founding Story</h3>
+            <p>Quisitive Businesses exists because our founders and leadership team lived those failures — not as observers, but as the professionals on the ground when major organisations went dark. That experience is not on a slide deck. It is built into every service delivery decision, every SLA commitment, and every engineering standard we hold ourselves to.</p>
+          </div>
+
+          <div class="about-section">
+            <h3>Core Conviction</h3>
+            <p>The company was built around a conviction that has not changed since its founding: that enterprise-grade security and infrastructure operations should not be a privilege of scale, and that the gap between alert and action should be measured in minutes, not days.</p>
+          </div>
+
+          <div class="about-section">
+            <h3>Certifications</h3>
+            <div class="certifications-grid">
+              <div class="certification-card">
+                <img src="c4.png.jpeg" alt="ISO 27001:2022 Certificate" />
+                <h4>ISO/IEC 27001:2022</h4>
+                <p class="cert-subtitle">Information Security Management System — CERTIFIED</p>
+                <button class="cert-details-toggle">View Details</button>
+                <div class="cert-details-content">
+                  <p>ISO 27001:2022 is the most current revision of the world's leading information security management standard. For an organisation that operates Security Operations Centres, Network Operations Centres, and managed infrastructure services — this is the certification that carries the most direct relevance to the security of every environment we touch.</p>
+                  <p>Our certification confirms that Quisitive Businesses has implemented a formally documented Information Security Management System (ISMS) — independently audited and verified to meet the requirements of ISO/IEC 27001:2022. The audit covered our full service scope: provision of end-to-end IT solutions including NOC services, SOC managed services, and cloud services, delivered based on client requirements, ensuring quality service delivery, information security, and effective IT service management.</p>
+                  <p>ISO 27001:2022 is not a one-time audit — it requires surveillance audits at regular intervals and a full recertification cycle, ensuring that the management system remains active and improving rather than lapsing after the initial certificate is issued. Our first surveillance audit is due January 2027; second surveillance in January 2028; with full recertification due by February 2029.</p>
+                </div>
+              </div>
+              
+              <div class="certification-card">
+                <img src="c3.png.jpeg" alt="ISO 9001:2015 Certificate" />
+                <h4>ISO 9001:2015</h4>
+                <p class="cert-subtitle">Quality Management System — CERTIFIED</p>
+                <button class="cert-details-toggle">View Details</button>
+                <div class="cert-details-content">
+                  <p>ISO 9001:2015 is the world's most widely adopted quality management standard — used by over one million organisations across more than 170 countries to demonstrate that their processes, procedures, and service delivery practices are structured, documented, consistently applied, and continuously improved.</p>
+                  <p>Our ISO 9001:2015 certification covers the same scope as our other certifications: provision of end-to-end IT solutions including NOC services, SOC managed services, and cloud services, delivered based on client requirements, ensuring quality service delivery, information security, and effective IT service management. This is not a certificate applied to an administrative function — it covers the operational delivery of the services our clients depend on.</p>
+                  <p>In a managed services context, quality management is what separates consistent, reliable delivery from variable performance that erodes trust over time. Our QMS defines the processes for how we design services, onboard clients, deliver operational functions, manage incidents, handle complaints, measure performance, and improve based on what the measurement reveals. Every SLA we commit to is backed by the process discipline that ISO 9001:2015 requires us to maintain.</p>
+                </div>
+              </div>
+              
+              <div class="certification-card">
+                <img src="c2.png.jpeg" alt="ISO 20000-1:2018 Certificate" />
+                <h4>ISO/IEC 20000-1:2018</h4>
+                <p class="cert-subtitle">IT Service Management System — CERTIFIED</p>
+                <button class="cert-details-toggle">View Details</button>
+                <div class="cert-details-content">
+                  <p>ISO 20000-1:2018 is the only international standard specifically designed for IT service management organisations — and it is the certification that most directly confirms that an IT service provider manages its services in a structured, disciplined, and audited way. For an organisation evaluating a managed NOC, SOC, or infrastructure services partner, this is the certification that speaks most directly to how the services are actually delivered and managed.</p>
+                  <p>ISO 20000-1:2018 requires an organisation to demonstrate a functioning Service Management System (SMS) — a documented, audited framework that governs the full lifecycle of IT service delivery, from service design and transition through operation and continual improvement. It is not a framework of recommendations. It is an auditable standard — meaning an independent third party has verified that the management system exists, is functioning, and meets the defined requirements.</p>
+                  <p>Our certification covers the scope that matters: provision of end-to-end IT solutions including Network Operations Centre (NOC) services, Security Operations Centre (SOC) managed services, and cloud services, delivered based on client requirements, ensuring quality service delivery, information security, and effective IT service management. Every service line we operate falls within this certified scope.</p>
+                </div>
+              </div>
+              
+              <div class="certification-card">
+                <img src="c1.png.jpeg" alt="SOC 2 Certification" />
+                <h4>SOC 2 Type II</h4>
+                <p class="cert-subtitle">Security, Availability & Confidentiality — IN PROGRESS</p>
+                <button class="cert-details-toggle">View Details</button>
+                <div class="cert-details-content">
+                  <p>SOC 2 Type II is one of the most demanding and most internationally recognised attestations for technology and managed service providers — and it is the attestation that most enterprises headquartered in the United States, and many across Europe and the Asia-Pacific, require as a minimum standard from their security and IT service partners.</p>
+                  <p>Unlike ISO certifications — which confirm that a management system is in place — a SOC 2 Type II report confirms that specific operational controls have been tested and verified as effective over a defined observation period, typically six to twelve months. A SOC 2 Type I report confirms that controls are designed correctly at a point in time. A SOC 2 Type II report — which is what we are pursuing — confirms that those controls operated effectively and consistently throughout the observation period. This is a substantially higher standard of assurance.</p>
+                  <p>The audit is conducted by an independent AICPA-licensed CPA firm that observes, tests, and reports on whether the organisation's controls governing security, availability, confidentiality, processing integrity, and privacy actually function as designed — not just whether they are documented. The resulting report is shared directly with clients and prospects under NDA, providing a transparent, independent view of how the organisation actually operates its security and service delivery controls.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="leadership-section">
+            <h3>Leadership Team</h3>
+            <div class="leadership-grid">
+              <div class="leader-card">
+                <h4>Sharry Maan</h4>
+                <p class="leader-title">Founder & Strategic Lead</p>
+                <p>Sharry Maan spent years working within the IT operations of some of the world's most recognised financial institutions — including Bank of America. What he observed, repeatedly, was something that should not have been possible at that level of investment: enterprises going down — not from inevitable catastrophic failures, but from the kind of network degradation and security incidents that a properly staffed, properly attentive operations function would have caught hours or days earlier.</p>
+                <p>He founded Quisitive Businesses to build the kind of operations function he had seen too many organisations lack — one where monitoring is not passive, escalation is not optional, and accountability for outcomes is written into the service contract.</p>
+                <ul class="leader-expertise">
+                  <li>Enterprise IT operations experience — global financial institutions including Bank of America</li>
+                  <li>Specialist in NOC and SOC operations model design and managed service delivery</li>
+                  <li>ISO 27001:2022, ISO 9001:2015, ISO 20000-1:2018 certified leadership</li>
+                  <li>Founder and strategic lead across all service lines</li>
+                </ul>
+              </div>
+
+              <div class="leader-card">
+                <h4>Deepi Dhiman</h4>
+                <p class="leader-title">Co-Founder & Operations Leadership</p>
+                <p>Deepi Dhiman brings strategic depth and operational leadership to Quisitive Businesses — complementing the technical foundation of the company with the organisational rigour required to build a service delivery operation that performs at the standard enterprise clients require.</p>
+                <p>Deepi co-founded Quisitive Businesses on the conviction that the gap between what most managed service providers promise and what they actually deliver is not primarily a technology gap — it is an operational and governance gap. She is responsible for ensuring that the company's delivery matches the standards its certifications and SLAs represent — every month, across every engagement.</p>
+                <ul class="leader-expertise">
+                  <li>Focus: processes, quality frameworks, client engagement model, team development</li>
+                  <li>Engineering standards and delivery quality oversight across all service lines</li>
+                  <li>Technology roadmap and team capability development leadership</li>
+                </ul>
+              </div>
+
+              <div class="leader-card">
+                <h4>Mohammad Iqbal Ahmad</h4>
+                <p class="leader-title">Chief Information Security Officer (CISO)</p>
+                <p>Mohammad Iqbal Ahmad serves as Chief Information Security Officer at Quisitive Businesses — the security authority behind every SOC engagement, MSSP delivery, and compliance advisory the company provides. He is an award-recognised cybersecurity leader with deep expertise in information security governance, cybersecurity compliance, and data privacy across regulated industry environments in India.</p>
+                <ul class="leader-expertise">
+                  <li>Expertise: SEBI CSCRF, RBI Cybersecurity Framework, DPDP Act, ISO 27001, PCI-DSS</li>
+                  <li>Background: financial services, technology, and consulting</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq section" id="faq">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-label">FAQ</span>
+        <h2 class="section-title">Frequently Asked<br />Questions</h2>
+        <p class="section-sub">Get answers to common questions about our services, processes, and partnerships.</p>
+      </div>
+      <div class="faq-grid">
+        <div class="faq-item fade-up">
+          <div class="faq-question">
+            <h3>What industries do you serve?</h3>
+            <button class="faq-toggle" aria-label="Toggle answer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+          </div>
+          <div class="faq-answer">
+            <p>We serve a wide range of industries including healthcare, finance, government, manufacturing, and technology. Our team has experience with Fortune 500 companies, startups, and everything in between.</p>
+          </div>
+        </div>
+        <div class="faq-item fade-up">
+          <div class="faq-question">
+            <h3>How long does a typical project take?</h3>
+            <button class="faq-toggle" aria-label="Toggle answer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+          </div>
+          <div class="faq-answer">
+            <p>Project timelines vary based on scope and complexity. Simple assessments can be completed in 2-4 weeks, while full digital transformations typically range from 3-12 months. We'll provide a detailed timeline during our initial consultation.</p>
+          </div>
+        </div>
+        <div class="faq-item fade-up">
+          <div class="faq-question">
+            <h3>Do you provide ongoing support after implementation?</h3>
+            <button class="faq-toggle" aria-label="Toggle answer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+          </div>
+          <div class="faq-answer">
+            <p>Yes, we offer comprehensive managed services and support packages. Our team provides 24/7 monitoring, regular maintenance, and continuous optimization to ensure your solutions remain secure and effective.</p>
+          </div>
+        </div>
+        <div class="faq-item fade-up">
+          <div class="faq-question">
+            <h3>What certifications do your consultants hold?</h3>
+            <button class="faq-toggle" aria-label="Toggle answer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+          </div>
+          <div class="faq-answer">
+            <p>Our consultants hold industry-leading certifications including CISSP, CISM, AWS Certified Solutions Architect, Microsoft Azure Solutions Architect Expert, and many others. We maintain active certifications and stay current with the latest technologies.</p>
+          </div>
+        </div>
+        <div class="faq-item fade-up">
+          <div class="faq-question">
+            <h3>How do you ensure data security and compliance?</h3>
+            <button class="faq-toggle" aria-label="Toggle answer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+          </div>
+          <div class="faq-answer">
+            <p>Security is embedded in everything we do. We follow zero-trust principles, maintain ISO 27001 certification, and comply with regulations like GDPR, HIPAA, and SOC 2. All our processes include security reviews and regular audits.</p>
+          </div>
+        </div>
+        <div class="faq-item fade-up">
+          <div class="faq-question">
+            <h3>Can you work with our existing technology stack?</h3>
+            <button class="faq-toggle" aria-label="Toggle answer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+          </div>
+          <div class="faq-answer">
+            <p>Absolutely. We specialize in integrating with existing systems and migrating legacy applications. Our approach focuses on maximizing your current investments while planning for future scalability.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DATA CENTER -->
+  <section class="data-center section" id="data-center">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-label">Data Center Solutions</span>
+        <h2 class="section-title">Cutting-edge Data Center<br />Solutions</h2>
+        <p class="section-sub">At QUISITIVE BUSINESSES, we offer cutting-edge data center solutions designed to keep your business running smoothly. Our facility combines advanced technology with top-tier security and reliability to ensure your data is always safe and accessible.</p>
+      </div>
+
+      <div class="data-center-content fade-up">
+        <div class="data-center-services">
+          <h3>Services</h3>
+          <ul>
+            <li><strong>Colocation:</strong> Secure, scalable, and flexible colocation services to meet your business needs.</li>
+            <li><strong>Cloud Solutions:</strong> High-performance cloud infrastructure for seamless integration and scalability.</li>
+            <li><strong>Managed Services:</strong> Comprehensive IT management services to optimize your infrastructure.</li>
+            <li><strong>Disaster Recovery:</strong> Robust disaster recovery solutions to protect your data against unexpected events.</li>
+          </ul>
+        </div>
+
+        <div class="data-center-cta">
+          <p>At QUISITIVE BUSINESSES, we are committed to providing reliable and innovative data center solutions that support your business's growth and continuity.</p>
+          <div class="cta-buttons">
+            <a href="#contact" class="btn btn-primary">Contact Us</a>
+            <a href="#contact" class="btn btn-outline">Get a Quote</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOUD SOLUTIONS -->
+  <section class="cloud-solutions section" id="cloud-solutions">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-label">Cloud Solutions</span>
+        <h2 class="section-title">Tailored Cloud<br />Infrastructure</h2>
+        <p class="section-sub">Public & Private Cloud: Tailored solutions to fit your specific needs, with scalability and flexibility. Hybrid Cloud: Seamlessly integrate on-premises and cloud resources for optimal performance.</p>
+      </div>
+
+      <div class="cloud-content fade-up">
+        <div class="cloud-contact-info">
+          <h3>Contact Information</h3>
+          <ul>
+            <li><strong>Email:</strong> info@i2wconsultant.com, info@quisitivebusinesses.com</li>
+            <li><strong>Website:</strong> www.quisitivebusinesses.com | www.i2wconsultant.com</li>
+            <li><strong>Address:</strong> SCO 109, 1st Floor, Guildford Square, PR 7 Airport Road, Zirakpur 140603 Distt SAS Nagar, Mohali Punjab</li>
+          </ul>
+        </div>
+
+        <div class="cloud-services">
+          <h3>Cloud Services</h3>
+          <div class="cloud-service-item">
+            <h4>Public & Private Cloud</h4>
+            <p>Tailored solutions to fit your specific needs, with scalability and flexibility.</p>
+          </div>
+          <div class="cloud-service-item">
+            <h4>Hybrid Cloud</h4>
+            <p>Seamlessly integrate on-premises and cloud resources for optimal performance.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOC AS A SERVICE -->
+  <section class="noc section" id="noc">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-label">NOC as a Service</span>
+        <h2 class="section-title">Enterprise-grade NOC<br />without the cost</h2>
+        <p class="section-sub">Eliminate downtime and reduce IT stress. Get a fully managed NOC with real-time monitoring, expert engineers, and compliance-ready reporting — scalable from startups to enterprises.</p>
+      </div>
+
+      <div class="noc-content fade-up">
+        <div class="noc-description">
+          <p>Quisitive Businesses delivers NOC as a Service built around dedicated, outsourced network operations — staffed around the clock by experienced engineers who monitor your infrastructure, manage faults, coordinate resolution, and keep your environment performing at the availability levels your business depends on. Not automated alerts sent to an inbox. Actual operations management, continuously.</p>
+        </div>
+
+        <div class="noc-differentiators">
+          <h3>3 Key Differentiators</h3>
+          <ul>
+            <li><strong>Dedicated (not pooled)</strong> — your network is monitored by engineers familiar with your environment.</li>
+            <li><strong>Proactive</strong> — performance trends are analysed to prevent outages rather than simply respond to them.</li>
+            <li><strong>Integrated</strong> — NOC team works alongside SOC and data centre consulting capabilities, providing broader operational context.</li>
+          </ul>
+        </div>
+
+        <div class="noc-vendor-coverage">
+          <h3>Vendor Coverage</h3>
+          <p>Our engineering team holds active certifications and operational experience across Cisco, Juniper, Fortinet, Palo Alto, HPE Aruba, Dell, and other major infrastructure vendors.</p>
+        </div>
+
+        <div class="noc-integrations">
+          <h3>Integrations</h3>
+          <p>We integrate seamlessly with ITSM platforms like ServiceNow and Jira, as well as cloud providers like AWS, Azure, and Google Cloud. Automate ticket creation, update workflows, and link cloud infrastructure monitoring directly into your NOC.</p>
+        </div>
+
+        <div class="noc-sla">
+          <h3>SLA Commitment</h3>
+          <p>Every engagement is governed by a formal service contract with defined acknowledgement windows, resolution targets by priority, and availability reporting obligations. Monthly SLA reports are produced as a standard deliverable — not provided on request. If SLA targets are not met, the contract specifies the remedy.</p>
+        </div>
+
+        <div class="noc-pricing">
+          <h3>Pricing</h3>
+          <p>Pricing is structured as a fixed monthly fee, providing predictable operational cost. Investment level depends on: number and type of monitored devices, number of sites, SLA response windows, environment complexity, and whether additional managed services like SOC are included.</p>
+        </div>
+
+        <div class="noc-testimonial">
+          <blockquote>"We had security tools in place, but too many alerts and not enough clarity. Quisitive's SOC gave us clear visibility and faster response — without adding more work for our team."</blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPLIANCE -->
+  <section class="compliance section" id="compliance">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-label">Compliance & Security</span>
+        <h2 class="section-title">Enterprise-Grade<br />Security & Compliance</h2>
+        <p class="section-sub">We maintain the highest standards of security and regulatory compliance to protect your business and data.</p>
+      </div>
+      <div class="compliance-grid">
+        <div class="compliance-card fade-up">
+          <div class="compliance-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+          </div>
+          <h3>ISO 27001 Certified</h3>
+          <p>Internationally recognized standard for information security management systems.</p>
+        </div>
+        <div class="compliance-card fade-up">
+          <div class="compliance-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3>SOC 2 Type II</h3>
+          <p>Independent audit of our security controls and processes.</p>
+        </div>
+        <div class="compliance-card fade-up">
+          <div class="compliance-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          </div>
+          <h3>GDPR Compliant</h3>
+          <p>Full compliance with EU General Data Protection Regulation.</p>
+        </div>
+        <div class="compliance-card fade-up">
+          <div class="compliance-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+          </div>
+          <h3>HIPAA Compliant</h3>
+          <p>Protected health information security and privacy standards.</p>
+        </div>
+        <div class="compliance-card fade-up">
+          <div class="compliance-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+            </svg>
+          </div>
+          <h3>Zero Trust Security</h3>
+          <p>Never trust, always verify — our security philosophy.</p>
+        </div>
+        <div class="compliance-card fade-up">
+          <div class="compliance-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+          </div>
+          <h3>24/7 Monitoring</h3>
+          <p>Continuous security monitoring and threat detection.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOC AS A SERVICE -->
+  <section class="soc section" id="soc">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-label">SOC as a Service</span>
+        <h2 class="section-title">Detection without response<br />is a report, not a service</h2>
+        <p class="section-sub">Our SOC delivers the complete security operations cycle — from the moment an anomaly is observed to the point where an incident is contained, documented, and the lessons from it are applied to prevent recurrence.</p>
+      </div>
+
+      <div class="soc-content fade-up">
+        <div class="soc-dedicated-model">
+          <h3>Dedicated Analyst Model</h3>
+          <p>Unlike models where your alerts are handled by whoever is available in a shared operations pool, our dedicated SOC team services assign a specific analyst team to your environment.</p>
+          <ul>
+            <li><strong>Named Tier 1 analyst team</strong> assigned to your environment</li>
+            <li><strong>Dedicated Tier 2 investigator</strong> with your environment context</li>
+            <li><strong>Tier 3 senior analyst and threat hunter</strong> on escalation path</li>
+          </ul>
+        </div>
+
+        <div class="soc-threat-intelligence">
+          <h3>Threat Intelligence</h3>
+          <p>We do not issue generic threat bulletins — we translate threat intelligence into detection rule updates, hunting hypotheses, and specific indicators of compromise that are relevant to your industry, your technology stack, and the adversary groups most likely to target organisations like yours.</p>
+          <ul>
+            <li>Continuous threat intelligence feed ingestion from commercial, open-source, and government sources</li>
+            <li>Industry-specific threat actor tracking — TTPs relevant to your sector</li>
+            <li>IoC integration into your detection platform</li>
+            <li>Weekly threat landscape brief relevant to your environment</li>
+            <li>Proactive detection rule updates when new attack techniques emerge</li>
+          </ul>
+        </div>
+
+        <div class="soc-siem">
+          <h3>SIEM Compatibility</h3>
+          <p>If you have an active deployment of Splunk, Microsoft Sentinel, IBM QRadar, Elastic SIEM, or another platform, we assess its current configuration, identify gaps in log source coverage and detection logic, and manage it as part of the service. If you do not have an existing SIEM, we deploy and manage an appropriate platform as part of the SOC implementation.</p>
+        </div>
+
+        <div class="soc-sla-accountability">
+          <h3>SLA & Accountability</h3>
+          <p>Every engagement is governed by a formal service contract with defined response windows. Monthly SLA performance reports are provided as standard — not on request. If we do not meet an SLA, the contract specifies the remedy. Accountability is not a promise. It is a contractual obligation.</p>
+        </div>
+
+        <div class="soc-pricing">
+          <h3>Pricing</h3>
+          <p>Our SOC as a Service is priced as a fixed monthly fee — giving you a predictable, budgetable commitment with no end-of-month surprise invoices.</p>
+          <h4>Scope Factors</h4>
+          <ul>
+            <li>Number and types of log sources monitored</li>
+            <li>Required SLA windows</li>
+            <li>Compliance framework support required</li>
+            <li>Whether standalone SOC or part of broader managed security arrangement</li>
+          </ul>
+        </div>
+
+        <div class="soc-industry-specific">
+          <h3>Industry-Specific Operations</h3>
+          <p>The threat actors targeting a financial institution, a hospital, a manufacturer, and a government agency are not the same. Their techniques differ, their objectives differ, and the vulnerabilities they exploit differ. Our SOC operations are scoped and tuned to the specific threat landscape and compliance obligations of your industry.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact section" id="contact">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-label">Get In Touch</span>
+        <h2 class="section-title">Take the First Step Towards<br />Achieving Your Business Goals</h2>
+        <p class="section-sub">Contact us today to learn how we can help transform your business with our comprehensive IT solutions.</p>
+      </div>
+      <div class="contact-wrapper fade-up">
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" name="firstName" placeholder="John" required />
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" name="lastName" placeholder="Smith" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Work Email</label>
+              <input type="email" id="email" name="email" placeholder="john@company.com" required />
+            </div>
+            <div class="form-group">
+              <label for="company">Company</label>
+              <input type="text" id="company" name="company" placeholder="Acme Corp" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="service">Service of Interest</label>
+            <select id="service" name="service">
+              <option value="" disabled selected>Select a service...</option>
+              <option>IT Strategy & Consulting</option>
+              <option>Cybersecurity Solutions</option>
+              <option>Cloud Solutions</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" placeholder="Tell us about your project or challenge..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg btn-submit" id="submitBtn">
+            <span class="btn-text">Send Message</span>
+            <span class="btn-loader" aria-hidden="true"></span>
+          </button>
+          <div class="form-success" id="formSuccess">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Message sent! We'll be in touch shortly.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONNECT WITH US -->
+  <section class="connect-section">
+    <div class="container">
+      <div class="connect-content">
+        <h2 class="connect-title">Connect With Us</h2>
+        <p class="connect-subtitle">Follow us on social media to stay updated with our latest news, insights, and innovations</p>
+        <div class="connect-social-links">
+          <a href="https://www.facebook.com/quisitivebusinesses" target="_blank" rel="noopener noreferrer" class="connect-social-link facebook" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            <span>Facebook</span>
+          </a>
+          <a href="https://www.linkedin.com/company/quisitive-businesses" target="_blank" rel="noopener noreferrer" class="connect-social-link linkedin" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <span>LinkedIn</span>
+          </a>
+          <a href="https://www.instagram.com/quisitivebusinesses" target="_blank" rel="noopener noreferrer" class="connect-social-link instagram" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg>
+            <span>Instagram</span>
+          </a>
+          <a href="https://www.youtube.com/@quisitivebusinesses" target="_blank" rel="noopener noreferrer" class="connect-social-link youtube" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            <span>YouTube</span>
+          </a>
+          <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" class="connect-social-link whatsapp" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            <span>WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="#home" class="nav-logo">
+          <img src="qb.png" alt="Quisitive" class="logo-img" />
+        </a>
+        <p>Enterprise technology solutions that drive real business outcomes. Your trusted partner in digital transformation.</p>
+        <div class="social-links">
+          <a href="https://www.facebook.com/quisitivebusinesses" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/quisitive-businesses" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/quisitivebusinesses" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@quisitivebusinesses" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">IT Strategy</a></li>
+          <li><a href="#services">Cybersecurity</a></li>
+          <li><a href="#services">Cloud Solutions</a></li>
+          <li><a href="#noc">NOC as a Service</a></li>
+          <li><a href="#soc">SOC as a Service</a></li>
+          <li><a href="#data-center">Data Center</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about-us">About Us</a></li>
+          <li><a href="#about-us">Our Team</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#compliance">Compliance</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <span>© 2026 Quisitive. All rights reserved.</span>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Certificate Modal -->
+  <div id="certificateModal" class="certificate-modal">
+    <span class="modal-close">&times;</span>
+    <img class="modal-content" id="modalImage" alt="Certificate">
+    <div class="modal-caption" id="modalCaption"></div>
+  </div>
+
+  <script>
+/* ===== NAVBAR SCROLL ===== */
+const navbar = document.getElementById('navbar');
+const navLinks = document.getElementById('navLinks');
+const hamburger = document.getElementById('hamburger');
+
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+  updateActiveLink();
+});
+
+/* ===== HAMBURGER MENU ===== */
+hamburger.addEventListener('click', (e) => {
+  e.stopPropagation();
+  hamburger.classList.toggle('open');
+  navLinks.classList.toggle('open');
+  
+  // FIX 1: Lock body scroll when menu is open
+  if (navLinks.classList.contains('open')) {
+    document.body.classList.add('nav-open');
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+  } else {
+    document.body.classList.remove('nav-open');
+    document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.width = '';
+  }
+});
+
+// Close menu when clicking nav links (except dropdown toggle)
+navLinks.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+    
+    // FIX 1: Restore body scroll when closing
+    document.body.classList.remove('nav-open');
+    document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.width = '';
+  });
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+  if (navLinks.classList.contains('open') && 
+      !navLinks.contains(e.target) && 
+      !hamburger.contains(e.target)) {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+    
+    // FIX 1: Restore body scroll when closing
+    document.body.classList.remove('nav-open');
+    document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.width = '';
+  }
+});
+
+/* ===== ACTIVE NAV LINK ===== */
+function updateActiveLink() {
+  const sections = document.querySelectorAll('section[id]');
+  const scrollY = window.scrollY + 120;
+  sections.forEach(section => {
+    const top = section.offsetTop;
+    const height = section.offsetHeight;
+    const id = section.getAttribute('id');
+    const link = document.querySelector(`.nav-link[href="#${id}"]`);
+    if (link) link.classList.toggle('active', scrollY >= top && scrollY < top + height);
+  });
+}
+
+/* ===== INTERSECTION OBSERVER — FADE UP ===== */
+const fadeEls = document.querySelectorAll('.fade-up');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+fadeEls.forEach(el => observer.observe(el));
+
+/* ===== COUNT-UP ANIMATION ===== */
+function countUp(el) {
+  const target = parseInt(el.dataset.target, 10);
+  const duration = 1800;
+  const start = performance.now();
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.floor(eased * target);
+    if (progress < 1) requestAnimationFrame(update);
+    else el.textContent = target;
+  }
+  requestAnimationFrame(update);
+}
+
+const statsSection = document.getElementById('stats');
+const statNumbers = document.querySelectorAll('.stat-number');
+let counted = false;
+const statsObserver = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting && !counted) {
+    counted = true;
+    statNumbers.forEach(el => countUp(el));
+    statsObserver.disconnect();
+  }
+}, { threshold: 0.4 });
+if (statsSection) statsObserver.observe(statsSection);
+
+/* ===== CONTACT FORM ===== */
+const form = document.getElementById('contactForm');
+const submitBtn = document.getElementById('submitBtn');
+const formSuccess = document.getElementById('formSuccess');
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const required = form.querySelectorAll('[required]');
+  let valid = true;
+  required.forEach(field => {
+    field.style.borderColor = '';
+    if (!field.value.trim()) { field.style.borderColor = '#ef4444'; valid = false; }
+  });
+  if (!valid) return;
+  submitBtn.classList.add('loading');
+  submitBtn.disabled = true;
+  setTimeout(() => {
+    submitBtn.classList.remove('loading');
+    submitBtn.disabled = false;
+    form.reset();
+    formSuccess.classList.add('show');
+    setTimeout(() => formSuccess.classList.remove('show'), 5000);
+  }, 1800);
+});
+
+form.querySelectorAll('input, textarea, select').forEach(field => {
+  field.addEventListener('input', () => { field.style.borderColor = ''; });
+});
+
+/* ===== FAQ ACCORDION ===== */
+document.querySelectorAll('.faq-toggle').forEach(toggle => {
+  toggle.addEventListener('click', () => {
+    const faqItem = toggle.closest('.faq-item');
+    const isActive = faqItem.classList.contains('active');
+    
+    // Close all FAQ items
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.classList.remove('active');
+    });
+    
+    // Open clicked item if it wasn't active
+    if (!isActive) {
+      faqItem.classList.add('active');
+    }
+  });
+});
+
+/* ===== DROPDOWN MENU ===== */
+const servicesDropdown = document.getElementById('servicesDropdown');
+const servicesMenu = document.getElementById('servicesMenu');
+const dropdownWrapper = servicesDropdown.parentElement; // Get the .dropdown wrapper
+
+// Desktop: hover to show (with proper hover handling)
+if (window.innerWidth >= 768) {
+  let hoverTimeout;
+  
+  // Show dropdown when hovering over the button or menu
+  const showDropdown = () => {
+    clearTimeout(hoverTimeout);
+    servicesDropdown.classList.add('active');
+    servicesMenu.classList.add('show');
+  };
+  
+  // Hide dropdown with a small delay to allow moving to menu
+  const hideDropdown = () => {
+    hoverTimeout = setTimeout(() => {
+      servicesDropdown.classList.remove('active');
+      servicesMenu.classList.remove('show');
+    }, 100); // 100ms delay
+  };
+  
+  // Hover on dropdown wrapper (contains both button and menu)
+  dropdownWrapper.addEventListener('mouseenter', showDropdown);
+  dropdownWrapper.addEventListener('mouseleave', hideDropdown);
+  
+  // Also handle hover on the menu itself for extra safety
+  servicesMenu.addEventListener('mouseenter', showDropdown);
+  servicesMenu.addEventListener('mouseleave', hideDropdown);
+}
+
+// Mobile: click to toggle
+servicesDropdown.addEventListener('click', (e) => {
+  if (window.innerWidth < 768) {
+    e.preventDefault();
+    e.stopPropagation();
+    const isActive = servicesDropdown.classList.toggle('active');
+    servicesMenu.classList.toggle('show', isActive);
+  }
+});
+
+// Close dropdown when clicking outside (desktop only)
+document.addEventListener('click', (e) => {
+  if (window.innerWidth >= 768) {
+    if (!dropdownWrapper.contains(e.target)) {
+      servicesDropdown.classList.remove('active');
+      servicesMenu.classList.remove('show');
+    }
+  }
+});
+
+// Close dropdown and menu when clicking dropdown items
+servicesMenu.querySelectorAll('.dropdown-item').forEach(item => {
+  item.addEventListener('click', () => {
+    servicesDropdown.classList.remove('active');
+    servicesMenu.classList.remove('show');
+    
+    // Close mobile menu if open
+    if (navLinks.classList.contains('open')) {
+      hamburger.classList.remove('open');
+      navLinks.classList.remove('open');
+      
+      // FIX 1: Restore body scroll when closing
+      document.body.classList.remove('nav-open');
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+    }
+  });
+});
+
+// Close dropdown when window is resized
+window.addEventListener('resize', () => {
+  if (window.innerWidth >= 769) {
+    // Desktop: close mobile menu if open
+    if (navLinks.classList.contains('open')) {
+      hamburger.classList.remove('open');
+      navLinks.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  } else {
+    // Mobile: close desktop dropdown if open
+    if (servicesMenu.classList.contains('show') && !navLinks.classList.contains('open')) {
+      servicesDropdown.classList.remove('active');
+      servicesMenu.classList.remove('show');
+    }
+  }
+});
+
+/* ===== SERVICE CARD EXPANDERS ===== */
+document.addEventListener('DOMContentLoaded', function() {
+  const toggleButtons = document.querySelectorAll('.card-toggle');
+  console.log('Found toggle buttons:', toggleButtons.length);
+  
+  toggleButtons.forEach((toggle, index) => {
+    console.log('Adding listener to button', index);
+    toggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log('Button clicked!', index);
+      
+      const card = toggle.closest('.service-card');
+      if (!card) {
+        console.error('No service-card found');
+        return;
+      }
+      
+      const isExpanded = card.classList.toggle('expanded');
+      console.log('Card expanded:', isExpanded);
+      
+      toggle.setAttribute('aria-expanded', String(isExpanded));
+      toggle.classList.toggle('open', isExpanded);
+      
+      // Update aria-hidden for accessibility
+      const desc = card.querySelector('.card-desc');
+      const features = card.querySelector('.card-features');
+      const details = card.querySelector('.card-details');
+      
+      if (desc) desc.setAttribute('aria-hidden', String(!isExpanded));
+      if (features) features.setAttribute('aria-hidden', String(!isExpanded));
+      if (details) details.setAttribute('aria-hidden', String(!isExpanded));
+    });
+  });
+
+  /* ===== CERTIFICATE MODAL ===== */
+  const modal = document.getElementById('certificateModal');
+  const modalImg = document.getElementById('modalImage');
+  const modalCaption = document.getElementById('modalCaption');
+  const closeBtn = document.querySelector('.modal-close');
+  
+  // Add click event to all certification images (not the whole card)
+  document.querySelectorAll('.certification-card img').forEach(img => {
+    img.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const card = this.closest('.certification-card');
+      const title = card.querySelector('h4').textContent;
+      const subtitle = card.querySelector('.cert-subtitle').textContent;
+      
+      modal.classList.add('show');
+      modalImg.src = this.src;
+      modalImg.alt = this.alt;
+      modalCaption.textContent = `${title} — ${subtitle}`;
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  
+  // Close modal when clicking X
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function() {
+      modal.classList.remove('show');
+      document.body.style.overflow = '';
+    });
+  }
+  
+  // Close modal when clicking outside the image
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      modal.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+  });
+  
+  // Close modal with Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.classList.contains('show')) {
+      modal.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+  });
+
+  /* ===== CERTIFICATE DETAILS TOGGLE ===== */
+  document.querySelectorAll('.cert-details-toggle').forEach(button => {
+    button.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const card = this.closest('.certification-card');
+      const content = card.querySelector('.cert-details-content');
+      const isActive = content.classList.toggle('show');
+      this.classList.toggle('active', isActive);
+      
+      // Update button text
+      this.textContent = isActive ? 'Hide Details' : 'View Details';
+      // Re-add the arrow
+      this.insertAdjacentHTML('beforeend', '');
+    });
+  });
+});
+  </script>
+</body>
+</html>
