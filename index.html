@@ -1900,7 +1900,6 @@ body.menu-open {
   border-radius: 12px;
   overflow: hidden;
   transition: all 0.3s ease;
-  cursor: pointer;
   display: flex;
   flex-direction: column;
 }
@@ -1920,6 +1919,7 @@ body.menu-open {
   justify-content: center;
   padding: 20px;
   border-bottom: 1px solid var(--border);
+  cursor: pointer;
 }
 
 .cert-showcase-image img {
@@ -1927,6 +1927,11 @@ body.menu-open {
   height: 100%;
   object-fit: contain;
   object-position: center;
+  transition: transform 0.3s ease;
+}
+
+.cert-showcase-image:hover img {
+  transform: scale(1.05);
 }
 
 .cert-showcase-content {
@@ -1936,13 +1941,14 @@ body.menu-open {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 16px;
 }
 
 .cert-showcase-content h3 {
   font-size: 1.125rem;
   font-weight: 700;
   color: var(--white);
-  margin-bottom: 10px;
+  margin-bottom: 0;
   letter-spacing: -0.01em;
 }
 
@@ -1953,6 +1959,43 @@ body.menu-open {
   letter-spacing: 0.05em;
   color: var(--green-light);
   line-height: 1.4;
+  margin-bottom: 0;
+}
+
+.cert-showcase-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, rgba(89,173,75,0.15), rgba(89,173,75,0.08));
+  border: 1px solid rgba(89,173,75,0.3);
+  border-radius: 8px;
+  color: var(--green-light);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Manrope', sans-serif;
+  margin-top: auto;
+}
+
+.cert-showcase-btn:hover {
+  background: linear-gradient(135deg, rgba(89,173,75,0.25), rgba(89,173,75,0.15));
+  border-color: var(--green-light);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(89,173,75,0.3);
+}
+
+.cert-showcase-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+
+.cert-showcase-btn:hover svg {
+  transform: translateX(4px);
 }
 
 /* ===== DATA CENTER ===== */
@@ -2834,6 +2877,7 @@ body.menu-open {
   
   .cert-showcase-content {
     padding: 20px 16px;
+    gap: 12px;
   }
   
   .cert-showcase-content h3 {
@@ -2842,6 +2886,12 @@ body.menu-open {
   
   .cert-showcase-subtitle {
     font-size: 0.6875rem;
+  }
+  
+  .cert-showcase-btn {
+    padding: 12px 20px;
+    font-size: 0.8125rem;
+    width: 100%;
   }
   
   /* Leadership - Single column */
@@ -4093,46 +4143,70 @@ body.menu-open {
       </div>
       <div class="certifications-showcase">
         <!-- ISO 27001 -->
-        <div class="cert-showcase-card fade-up" onclick="openCertDetailsModal('c4.png.jpeg', 'ISO/IEC 27001:2022', 'INFORMATION SECURITY MANAGEMENT SYSTEM — CERTIFIED', 'ISO 27001:2022 is the most current revision of the world\'s leading information security management standard. For an organisation that operates Security Operations Centres, Network Operations Centres, and managed infrastructure services — this is the certification that carries the most direct relevance to the security of every environment we touch.\n\nOur certification confirms that Quisitive Businesses has implemented a formally documented Information Security Management System (ISMS) — independently audited and verified to meet the requirements of ISO/IEC 27001:2022. The audit covered our full service scope: provision of end-to-end IT solutions including NOC services, SOC managed services, and cloud services, delivered based on client requirements, ensuring quality service delivery, information security, and effective IT service management.\n\nISO 27001:2022 is not a one-time audit — it requires surveillance audits at regular intervals and a full recertification cycle, ensuring that the management system remains active and improving rather than lapsing after the initial certificate is issued. Our first surveillance audit is due January 2027; second surveillance in January 2028; with full recertification due by February 2029.')">
+        <div class="cert-showcase-card fade-up">
           <div class="cert-showcase-image">
             <img src="c4.png.jpeg" alt="ISO 27001:2022 Certificate" />
           </div>
           <div class="cert-showcase-content">
             <h3>ISO/IEC 27001:2022</h3>
             <p class="cert-showcase-subtitle">INFORMATION SECURITY MANAGEMENT SYSTEM — CERTIFIED</p>
+            <button class="cert-showcase-btn" onclick="openCertDetailsModal('c4.png.jpeg', 'ISO/IEC 27001:2022', 'INFORMATION SECURITY MANAGEMENT SYSTEM — CERTIFIED', 'ISO 27001:2022 is the most current revision of the world\'s leading information security management standard. For an organisation that operates Security Operations Centres, Network Operations Centres, and managed infrastructure services — this is the certification that carries the most direct relevance to the security of every environment we touch.\\n\\nOur certification confirms that Quisitive Businesses has implemented a formally documented Information Security Management System (ISMS) — independently audited and verified to meet the requirements of ISO/IEC 27001:2022. The audit covered our full service scope: provision of end-to-end IT solutions including NOC services, SOC managed services, and cloud services, delivered based on client requirements, ensuring quality service delivery, information security, and effective IT service management.\\n\\nISO 27001:2022 is not a one-time audit — it requires surveillance audits at regular intervals and a full recertification cycle, ensuring that the management system remains active and improving rather than lapsing after the initial certificate is issued. Our first surveillance audit is due January 2027; second surveillance in January 2028; with full recertification due by February 2029.')">
+              View Details
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </button>
           </div>
         </div>
         
         <!-- ISO 9001 -->
-        <div class="cert-showcase-card fade-up" onclick="openCertDetailsModal('c3.png.jpeg', 'ISO 9001:2015', 'QUALITY MANAGEMENT SYSTEM — CERTIFIED', 'ISO 9001:2015 is the world\'s most widely adopted quality management standard — used by over one million organisations across more than 170 countries to demonstrate that their processes, procedures, and service delivery practices are structured, documented, consistently applied, and continuously improved.\n\nOur ISO 9001:2015 certification covers the same scope as our other certifications: provision of end-to-end IT solutions including NOC services, SOC managed services, and cloud services, delivered based on client requirements, ensuring quality service delivery, information security, and effective IT service management. This is not a certificate applied to an administrative function — it covers the operational delivery of the services our clients depend on.\n\nIn a managed services context, quality management is what separates consistent, reliable delivery from variable performance that erodes trust over time. Our QMS defines the processes for how we design services, onboard clients, deliver operational functions, manage incidents, handle complaints, measure performance, and improve based on what the measurement reveals. Every SLA we commit to is backed by the process discipline that ISO 9001:2015 requires us to maintain.')">
+        <div class="cert-showcase-card fade-up">
           <div class="cert-showcase-image">
             <img src="c3.png.jpeg" alt="ISO 9001:2015 Certificate" />
           </div>
           <div class="cert-showcase-content">
             <h3>ISO 9001:2015</h3>
             <p class="cert-showcase-subtitle">QUALITY MANAGEMENT SYSTEM — CERTIFIED</p>
+            <button class="cert-showcase-btn" onclick="openCertDetailsModal('c3.png.jpeg', 'ISO 9001:2015', 'QUALITY MANAGEMENT SYSTEM — CERTIFIED', 'ISO 9001:2015 is the world\'s most widely adopted quality management standard — used by over one million organisations across more than 170 countries to demonstrate that their processes, procedures, and service delivery practices are structured, documented, consistently applied, and continuously improved.\\n\\nOur ISO 9001:2015 certification covers the same scope as our other certifications: provision of end-to-end IT solutions including NOC services, SOC managed services, and cloud services, delivered based on client requirements, ensuring quality service delivery, information security, and effective IT service management. This is not a certificate applied to an administrative function — it covers the operational delivery of the services our clients depend on.\\n\\nIn a managed services context, quality management is what separates consistent, reliable delivery from variable performance that erodes trust over time. Our QMS defines the processes for how we design services, onboard clients, deliver operational functions, manage incidents, handle complaints, measure performance, and improve based on what the measurement reveals. Every SLA we commit to is backed by the process discipline that ISO 9001:2015 requires us to maintain.')">
+              View Details
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </button>
           </div>
         </div>
         
         <!-- ISO 20000 -->
-        <div class="cert-showcase-card fade-up" onclick="openCertDetailsModal('c2.png.jpeg', 'ISO/IEC 20000-1:2018', 'IT SERVICE MANAGEMENT SYSTEM — CERTIFIED', 'ISO 20000-1:2018 is the only international standard specifically designed for IT service management organisations — and it is the certification that most directly confirms that an IT service provider manages its services in a structured, disciplined, and audited way. For an organisation evaluating a managed NOC, SOC, or infrastructure services partner, this is the certification that speaks most directly to how the services are actually delivered and managed.\n\nISO 20000-1:2018 requires an organisation to demonstrate a functioning Service Management System (SMS) — a documented, audited framework that governs the full lifecycle of IT service delivery, from service design and transition through operation and continual improvement. It is not a framework of recommendations. It is an auditable standard — meaning an independent third party has verified that the management system exists, is functioning, and meets the defined requirements.\n\nOur certification covers the scope that matters: provision of end-to-end IT solutions including Network Operations Centre (NOC) services, Security Operations Centre (SOC) managed services, and cloud services, delivered based on client requirements, ensuring quality service delivery, information security, and effective IT service management. Every service line we operate falls within this certified scope.')">
+        <div class="cert-showcase-card fade-up">
           <div class="cert-showcase-image">
             <img src="c2.png.jpeg" alt="ISO 20000-1:2018 Certificate" />
           </div>
           <div class="cert-showcase-content">
             <h3>ISO/IEC 20000-1:2018</h3>
             <p class="cert-showcase-subtitle">IT SERVICE MANAGEMENT SYSTEM — CERTIFIED</p>
+            <button class="cert-showcase-btn" onclick="openCertDetailsModal('c2.png.jpeg', 'ISO/IEC 20000-1:2018', 'IT SERVICE MANAGEMENT SYSTEM — CERTIFIED', 'ISO 20000-1:2018 is the only international standard specifically designed for IT service management organisations — and it is the certification that most directly confirms that an IT service provider manages its services in a structured, disciplined, and audited way. For an organisation evaluating a managed NOC, SOC, or infrastructure services partner, this is the certification that speaks most directly to how the services are actually delivered and managed.\\n\\nISO 20000-1:2018 requires an organisation to demonstrate a functioning Service Management System (SMS) — a documented, audited framework that governs the full lifecycle of IT service delivery, from service design and transition through operation and continual improvement. It is not a framework of recommendations. It is an auditable standard — meaning an independent third party has verified that the management system exists, is functioning, and meets the defined requirements.\\n\\nOur certification covers the scope that matters: provision of end-to-end IT solutions including Network Operations Centre (NOC) services, Security Operations Centre (SOC) managed services, and cloud services, delivered based on client requirements, ensuring quality service delivery, information security, and effective IT service management. Every service line we operate falls within this certified scope.')">
+              View Details
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </button>
           </div>
         </div>
         
         <!-- SOC 2 -->
-        <div class="cert-showcase-card fade-up" onclick="openCertDetailsModal('c1.png.jpeg', 'SOC 2 Type II', 'SECURITY, AVAILABILITY & CONFIDENTIALITY — IN PROGRESS', 'SOC 2 Type II is one of the most demanding and most internationally recognised attestations for technology and managed service providers — and it is the attestation that most enterprises headquartered in the United States, and many across Europe and the Asia-Pacific, require as a minimum standard from their security and IT service partners.\n\nUnlike ISO certifications — which confirm that a management system is in place — a SOC 2 Type II report confirms that specific operational controls have been tested and verified as effective over a defined observation period, typically six to twelve months. A SOC 2 Type I report confirms that controls are designed correctly at a point in time. A SOC 2 Type II report — which is what we are pursuing — confirms that those controls operated effectively and consistently throughout the observation period. This is a substantially higher standard of assurance.\n\nThe audit is conducted by an independent AICPA-licensed CPA firm that observes, tests, and reports on whether the organisation\'s controls governing security, availability, confidentiality, processing integrity, and privacy actually function as designed — not just whether they are documented. The resulting report is shared directly with clients and prospects under NDA, providing a transparent, independent view of how the organisation actually operates its security and service delivery controls.')">
+        <div class="cert-showcase-card fade-up">
           <div class="cert-showcase-image">
             <img src="c1.png.jpeg" alt="SOC 2 Type II Certificate" />
           </div>
           <div class="cert-showcase-content">
             <h3>SOC 2 Type II</h3>
             <p class="cert-showcase-subtitle">SECURITY, AVAILABILITY & CONFIDENTIALITY — IN PROGRESS</p>
+            <button class="cert-showcase-btn" onclick="openCertDetailsModal('c1.png.jpeg', 'SOC 2 Type II', 'SECURITY, AVAILABILITY & CONFIDENTIALITY — IN PROGRESS', 'SOC 2 Type II is one of the most demanding and most internationally recognised attestations for technology and managed service providers — and it is the attestation that most enterprises headquartered in the United States, and many across Europe and the Asia-Pacific, require as a minimum standard from their security and IT service partners.\\n\\nUnlike ISO certifications — which confirm that a management system is in place — a SOC 2 Type II report confirms that specific operational controls have been tested and verified as effective over a defined observation period, typically six to twelve months. A SOC 2 Type I report confirms that controls are designed correctly at a point in time. A SOC 2 Type II report — which is what we are pursuing — confirms that those controls operated effectively and consistently throughout the observation period. This is a substantially higher standard of assurance.\\n\\nThe audit is conducted by an independent AICPA-licensed CPA firm that observes, tests, and reports on whether the organisation\'s controls governing security, availability, confidentiality, processing integrity, and privacy actually function as designed — not just whether they are documented. The resulting report is shared directly with clients and prospects under NDA, providing a transparent, independent view of how the organisation actually operates its security and service delivery controls.')">
+              View Details
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </button>
           </div>
         </div>
       </div>
