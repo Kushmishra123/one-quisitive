@@ -1764,6 +1764,274 @@ body.menu-open {
   max-width: 700px;
 }
 
+/* ===== SERVICE MODAL ===== */
+.service-modal {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.service-modal.show {
+  display: block;
+  opacity: 1;
+}
+
+.service-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(20px);
+  z-index: 1;
+}
+
+.service-modal-container {
+  position: relative;
+  background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+  margin: 5vh auto;
+  padding: 0;
+  border: 1px solid rgba(89, 173, 75, 0.2);
+  border-radius: 20px;
+  width: 90%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 32px 100px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.03);
+  z-index: 2;
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.service-modal-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 3;
+}
+
+.service-modal-close:hover {
+  background: rgba(89, 173, 75, 0.15);
+  border-color: rgba(89, 173, 75, 0.4);
+  transform: rotate(90deg);
+}
+
+.service-modal-close svg {
+  width: 20px;
+  height: 20px;
+  color: var(--white);
+}
+
+.service-modal-content {
+  padding: 56px 48px 48px;
+}
+
+.service-modal-header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.service-modal-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, rgba(89, 173, 75, 0.15), rgba(89, 173, 75, 0.05));
+  border: 1px solid rgba(89, 173, 75, 0.3);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+}
+
+.service-modal-icon svg {
+  width: 36px;
+  height: 36px;
+  color: var(--green-light);
+}
+
+.service-modal-tag {
+  display: inline-block;
+  padding: 6px 16px;
+  background: rgba(89, 173, 75, 0.1);
+  border: 1px solid rgba(89, 173, 75, 0.25);
+  border-radius: 20px;
+  color: var(--green-light);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+
+.service-modal-title {
+  font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.service-modal-desc {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.service-modal-body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+.service-modal-features h3,
+.service-modal-details h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+
+.service-modal-features-list,
+.service-modal-details-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.service-modal-features-list li,
+.service-modal-details-list li {
+  padding: 12px 0 12px 32px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.service-modal-features-list li:last-child,
+.service-modal-details-list li:last-child {
+  border-bottom: none;
+}
+
+.service-modal-features-list li::before,
+.service-modal-details-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 18px;
+  width: 6px;
+  height: 6px;
+  background: var(--green-light);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(89, 173, 75, 0.6);
+}
+
+.service-modal-details-text {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 20px;
+}
+
+/* Service Modal - Responsive */
+@media (max-width: 768px) {
+  .service-modal-container {
+    width: 95%;
+    margin: 3vh auto;
+    max-height: 94vh;
+  }
+  
+  .service-modal-content {
+    padding: 48px 28px 32px;
+  }
+  
+  .service-modal-close {
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .service-modal-icon {
+    width: 64px;
+    height: 64px;
+  }
+  
+  .service-modal-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .service-modal-title {
+    font-size: 1.5rem;
+  }
+  
+  .service-modal-desc {
+    font-size: 0.9375rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .service-modal-container {
+    width: 96%;
+    margin: 2vh auto;
+    max-height: 96vh;
+    border-radius: 16px;
+  }
+  
+  .service-modal-content {
+    padding: 44px 20px 28px;
+  }
+  
+  .service-modal-header {
+    margin-bottom: 28px;
+    padding-bottom: 24px;
+  }
+  
+  .service-modal-body {
+    gap: 24px;
+  }
+  
+  .service-modal-features-list li,
+  .service-modal-details-list li {
+    font-size: 0.875rem;
+    padding: 10px 0 10px 28px;
+  }
+}
+
 /* ===== LEADERSHIP ===== */
 .leadership-section h3 { text-align: center; margin-bottom: 32px; }
 .leadership-grid {
@@ -4693,40 +4961,110 @@ window.addEventListener('resize', () => {
   }
 });
 
-/* ===== SERVICE CARD EXPANDERS ===== */
+/* ===== SERVICE CARD MODAL ===== */
 document.addEventListener('DOMContentLoaded', function() {
   const toggleButtons = document.querySelectorAll('.card-toggle');
-  console.log('Found toggle buttons:', toggleButtons.length);
   
-  toggleButtons.forEach((toggle, index) => {
-    console.log('Adding listener to button', index);
+  toggleButtons.forEach((toggle) => {
     toggle.addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
-      console.log('Button clicked!', index);
       
       const card = toggle.closest('.service-card');
-      if (!card) {
-        console.error('No service-card found');
-        return;
-      }
+      if (!card) return;
       
-      const isExpanded = card.classList.toggle('expanded');
-      console.log('Card expanded:', isExpanded);
+      // Get card content
+      const icon = card.querySelector('.card-icon svg').outerHTML;
+      const tag = card.querySelector('.card-tag').textContent;
+      const title = card.querySelector('.card-title').textContent;
+      const desc = card.querySelector('.card-desc').textContent;
+      const features = Array.from(card.querySelectorAll('.card-features li')).map(li => li.textContent);
+      const detailsText = card.querySelector('.card-details p').textContent;
+      const detailsList = Array.from(card.querySelectorAll('.card-details ul li')).map(li => li.textContent);
       
-      toggle.setAttribute('aria-expanded', String(isExpanded));
-      toggle.classList.toggle('open', isExpanded);
-      
-      // Update aria-hidden for accessibility
-      const desc = card.querySelector('.card-desc');
-      const features = card.querySelector('.card-features');
-      const details = card.querySelector('.card-details');
-      
-      if (desc) desc.setAttribute('aria-hidden', String(!isExpanded));
-      if (features) features.setAttribute('aria-hidden', String(!isExpanded));
-      if (details) details.setAttribute('aria-hidden', String(!isExpanded));
+      // Show modal with service details
+      showServiceModal(icon, tag, title, desc, features, detailsText, detailsList);
     });
   });
+  
+  function showServiceModal(icon, tag, title, desc, features, detailsText, detailsList) {
+    // Create modal if it doesn't exist
+    let modal = document.getElementById('serviceModal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'serviceModal';
+      modal.className = 'service-modal';
+      modal.innerHTML = `
+        <div class="service-modal-overlay"></div>
+        <div class="service-modal-container">
+          <button class="service-modal-close" aria-label="Close modal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+          </button>
+          <div class="service-modal-content">
+            <div class="service-modal-header">
+              <div class="service-modal-icon"></div>
+              <div class="service-modal-tag"></div>
+              <h2 class="service-modal-title"></h2>
+              <p class="service-modal-desc"></p>
+            </div>
+            <div class="service-modal-body">
+              <div class="service-modal-features">
+                <h3>Key Features</h3>
+                <ul class="service-modal-features-list"></ul>
+              </div>
+              <div class="service-modal-details">
+                <h3>Overview</h3>
+                <p class="service-modal-details-text"></p>
+                <ul class="service-modal-details-list"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      
+      // Close button handler
+      modal.querySelector('.service-modal-close').addEventListener('click', () => {
+        modal.classList.remove('show');
+        document.body.style.overflow = '';
+      });
+      
+      // Overlay click handler
+      modal.querySelector('.service-modal-overlay').addEventListener('click', () => {
+        modal.classList.remove('show');
+        document.body.style.overflow = '';
+      });
+      
+      // ESC key handler
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('show')) {
+          modal.classList.remove('show');
+          document.body.style.overflow = '';
+        }
+      });
+    }
+    
+    // Update modal content
+    modal.querySelector('.service-modal-icon').innerHTML = icon;
+    modal.querySelector('.service-modal-tag').textContent = tag;
+    modal.querySelector('.service-modal-title').textContent = title;
+    modal.querySelector('.service-modal-desc').textContent = desc;
+    
+    // Update features list
+    const featuresList = modal.querySelector('.service-modal-features-list');
+    featuresList.innerHTML = features.map(f => `<li>${f}</li>`).join('');
+    
+    // Update details
+    modal.querySelector('.service-modal-details-text').textContent = detailsText;
+    const detailsListEl = modal.querySelector('.service-modal-details-list');
+    detailsListEl.innerHTML = detailsList.map(d => `<li>${d}</li>`).join('');
+    
+    // Show modal
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
 
   /* ===== CERTIFICATE MODAL ===== */
   const modal = document.getElementById('certificateModal');
