@@ -1267,16 +1267,17 @@ body.menu-open {
 .stat-divider { width: 1px; height: 60px; background: var(--border); flex-shrink: 0; }
 
 /* ===== ABOUT US ===== */
-.about-us { background: var(--bg-2); }
+.about-us { background: var(--bg-2); display: block; width: 100%; }
 .about-us .section-header { margin-bottom: 48px; }
-.about-content { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
-.about-section { margin-bottom: 48px; }
+.about-content { max-width: 1280px; margin: 0 auto; padding: 0 40px; display: block; width: 100%; }
+.about-section { margin-bottom: 48px; display: block; width: 100%; }
 .about-section h3 {
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--white);
   margin-bottom: 16px;
   letter-spacing: -0.01em;
+  display: block;
 }
 .about-section p {
   color: var(--gray-400);
@@ -2577,15 +2578,37 @@ body.menu-open {
     grid-template-columns: 1fr;
     gap: 24px;
     max-width: 100%;
+    display: grid;
+    margin-top: 24px;
   }
   
   .certification-card {
     padding: 24px 20px;
     max-width: 100%;
+    display: flex;
+    flex-direction: column;
   }
   
   .certification-card img {
-    height: 200px;
+    height: 180px;
+    width: 100%;
+    object-fit: contain;
+  }
+  
+  .certification-card h4 {
+    font-size: 1.125rem;
+    margin-bottom: 8px;
+  }
+  
+  .certification-card .cert-subtitle {
+    font-size: 0.8125rem;
+    margin-bottom: 16px;
+  }
+  
+  .cert-details-toggle {
+    padding: 12px 20px;
+    font-size: 0.875rem;
+    min-height: 44px;
   }
   
   /* Certificate Modal - Full screen */
@@ -2731,31 +2754,77 @@ body.menu-open {
   /* About Section - Mobile */
   .about-content {
     padding: 0 16px;
+    max-width: 100%;
   }
   
   .about-section {
     margin-bottom: 40px;
+    display: block;
+    width: 100%;
   }
   
   .about-section h3 {
     font-size: 1.25rem;
     margin-bottom: 14px;
+    display: block;
+    color: var(--white);
   }
   
   .about-section p {
     font-size: 0.9375rem;
     line-height: 1.7;
     margin-bottom: 14px;
+    display: block;
+    color: var(--gray-400);
+  }
+  
+  /* Leadership Section - Mobile */
+  .leadership-section {
+    margin-top: 48px;
+    display: block;
+    width: 100%;
+  }
+  
+  .leadership-section h3 {
+    font-size: 1.25rem;
+    margin-bottom: 24px;
+    text-align: center;
   }
   
   /* Leadership - Single column */
   .leadership-grid {
     grid-template-columns: 1fr;
     gap: 24px;
+    display: grid;
   }
   
   .leader-card {
     padding: 24px 20px;
+    display: block;
+  }
+  
+  .leader-card h4 {
+    font-size: 1.125rem;
+    margin-bottom: 8px;
+  }
+  
+  .leader-title {
+    font-size: 0.875rem;
+    margin-bottom: 16px;
+  }
+  
+  .leader-card p {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+  
+  .leader-expertise {
+    font-size: 0.875rem;
+  }
+  
+  .leader-expertise li {
+    margin-bottom: 10px;
   }
   
   /* Compliance - Single column */
@@ -2945,10 +3014,12 @@ body.menu-open {
   /* About Section - Tablet */
   .about-content {
     padding: 0 24px;
+    max-width: 100%;
   }
   
   .about-section {
     margin-bottom: 44px;
+    display: block;
   }
   
   .about-section h3 {
@@ -2959,10 +3030,20 @@ body.menu-open {
     font-size: 0.9375rem;
   }
   
+  /* Leadership Section - Tablet */
+  .leadership-section h3 {
+    font-size: 1.375rem;
+    margin-bottom: 28px;
+  }
+  
   /* Leadership - 2 columns */
   .leadership-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 28px;
+  }
+  
+  .leader-card {
+    padding: 28px 24px;
   }
   
   /* Compliance - 2 columns */
