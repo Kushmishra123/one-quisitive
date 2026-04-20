@@ -577,12 +577,34 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
 
 /* ===== NAVBAR RESPONSIVE FIX ===== */
 
-/* FIX 1: Body scroll lock CSS class */
+/* FIX 1: Body scroll lock CSS class (nav menu) */
 body.nav-open {
   overflow: hidden !important;
   position: fixed !important;
   width: 100% !important;
   height: 100% !important;
+}
+
+/* ===== MODAL SCROLL LOCK ===== */
+/* Locks background scroll when any modal is open.
+   Uses position:fixed + stored scroll offset to prevent
+   iOS Safari scroll-through. Padding-right compensates
+   for the scrollbar disappearing to prevent layout shift. */
+body.modal-open {
+  overflow: hidden !important;
+  position: fixed !important;
+  width: 100% !important;
+  /* top is set dynamically via JS to preserve scroll position */
+}
+
+/* Ensure modals themselves are scrollable internally */
+.certificate-modal {
+  -webkit-overflow-scrolling: touch;
+}
+
+.cert-modal-container,
+.service-modal-container {
+  -webkit-overflow-scrolling: touch;
 }
 
 /* FIX 2: Pin navbar, logo, and hamburger to top */
@@ -1394,15 +1416,24 @@ body.menu-open {
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
+  /* overflow on the modal itself is intentionally hidden;
+     internal scrolling is handled by the image + caption layout */
+  overflow: hidden;
   background-color: rgba(0, 0, 0, 0.95);
   backdrop-filter: blur(10px);
+  touch-action: none; /* prevents iOS scroll-through */
 }
 .certificate-modal.show {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  animation: modalOverlayFadeIn 0.2s ease;
+}
+
+@keyframes modalOverlayFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 .modal-content {
   max-width: 90%;
@@ -1773,7 +1804,10 @@ body.menu-open {
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
+  overflow-y: auto;           /* overlay itself scrolls so container is reachable on small screens */
+  overflow-x: hidden;
+  touch-action: none;         /* iOS scroll-through prevention */
+  -webkit-overflow-scrolling: touch;
 }
 
 .service-modal.show {
@@ -4711,6 +4745,47 @@ body.menu-open {
   </div>
 
   <script>
+/* ===== SCROLL LOCK HELPERS ===== */
+// Centralised helpers used by ALL modals.
+// - Stores the current scroll Y so position:fixed doesn't jump to 0.
+// - Measures the scrollbar width and adds it as padding-right to prevent
+//   layout shift when the scrollbar disappears.
+// - Works on iOS Safari (which ignores overflow:hidden on body) because
+//   position:fixed at the stored scroll offset effectively freezes the page.
+let _scrollLockCount = 0;
+let _savedScrollY = 0;
+
+function lockBodyScroll() {
+  if (_scrollLockCount === 0) {
+    // Calculate scrollbar width once
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    _savedScrollY = window.scrollY;
+
+    document.body.style.top = `-${_savedScrollY}px`;
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+      // Also compensate the fixed navbar so it doesn't shift
+      const nb = document.getElementById('navbar');
+      if (nb) nb.style.paddingRight = `${scrollbarWidth}px`;
+    }
+    document.body.classList.add('modal-open');
+  }
+  _scrollLockCount++;
+}
+
+function unlockBodyScroll() {
+  _scrollLockCount = Math.max(0, _scrollLockCount - 1);
+  if (_scrollLockCount === 0) {
+    document.body.classList.remove('modal-open');
+    document.body.style.top = '';
+    document.body.style.paddingRight = '';
+    const nb = document.getElementById('navbar');
+    if (nb) nb.style.paddingRight = '';
+    // Restore the scroll position that was active before the modal opened
+    window.scrollTo(0, _savedScrollY);
+  }
+}
+
 /* ===== NAVBAR SCROLL ===== */
 const navbar = document.getElementById('navbar');
 const navLinks = document.getElementById('navLinks');
@@ -4854,25 +4929,43 @@ form.querySelectorAll('input, textarea, select').forEach(field => {
 });
 
 /* ===== FAQ ACCORDION ===== */
-document.querySelectorAll('.faq-toggle').forEach(toggle => {
-  toggle.addEventListener('click', (e) => {
+const faqGrid = document.querySelector('.faq-grid');
+if (faqGrid) {
+  // Ensure all toggles start with correct ARIA state
+  faqGrid.querySelectorAll('.faq-toggle').forEach(toggle => {
+    toggle.setAttribute('aria-expanded', 'false');
+  });
+
+  faqGrid.addEventListener('click', (e) => {
+    const question = e.target.closest('.faq-question');
+    if (!question || !faqGrid.contains(question)) return;
+
     e.preventDefault();
-    e.stopPropagation();
-    
-    const faqItem = toggle.closest('.faq-item');
+
+    const faqItem = question.closest('.faq-item');
+    if (!faqItem) return;
+
+    const toggle = question.querySelector('.faq-toggle');
     const isActive = faqItem.classList.contains('active');
-    
-    // Close all FAQ items first
-    document.querySelectorAll('.faq-item').forEach(item => {
-      item.classList.remove('active');
+
+    // Close every other FAQ item, leave the clicked item alone for now
+    faqGrid.querySelectorAll('.faq-item.active').forEach(item => {
+      if (item !== faqItem) {
+        item.classList.remove('active');
+        const otherToggle = item.querySelector('.faq-toggle');
+        if (otherToggle) otherToggle.setAttribute('aria-expanded', 'false');
+      }
     });
-    
-    // Open clicked item only if it wasn't already active
-    if (!isActive) {
+
+    if (isActive) {
+      faqItem.classList.remove('active');
+      if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    } else {
       faqItem.classList.add('active');
+      if (toggle) toggle.setAttribute('aria-expanded', 'true');
     }
   });
-});
+}
 
 /* ===== DROPDOWN MENU ===== */
 const servicesDropdown = document.getElementById('servicesDropdown');
@@ -5032,20 +5125,20 @@ document.addEventListener('DOMContentLoaded', function() {
       // Close button handler
       modal.querySelector('.service-modal-close').addEventListener('click', () => {
         modal.classList.remove('show');
-        document.body.style.overflow = '';
+        unlockBodyScroll();
       });
       
       // Overlay click handler
       modal.querySelector('.service-modal-overlay').addEventListener('click', () => {
         modal.classList.remove('show');
-        document.body.style.overflow = '';
+        unlockBodyScroll();
       });
       
-      // ESC key handler
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('show')) {
+      // ESC key handler (service modal specific — avoids duplicating for cert modal)
+      modal.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
           modal.classList.remove('show');
-          document.body.style.overflow = '';
+          unlockBodyScroll();
         }
       });
     }
@@ -5067,7 +5160,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Show modal
     modal.classList.add('show');
-    document.body.style.overflow = 'hidden';
+    lockBodyScroll();
+    // Trap focus: move focus into the modal
+    const firstFocusable = modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (firstFocusable) firstFocusable.focus();
   }
 
   /* ===== CERTIFICATE MODAL ===== */
@@ -5082,7 +5178,7 @@ document.addEventListener('DOMContentLoaded', function() {
     modalImg.src = imageSrc;
     modalImg.alt = title;
     modalCaption.textContent = title;
-    document.body.style.overflow = 'hidden';
+    lockBodyScroll();
   };
   
   // Add click event to all certification images (not the whole card)
@@ -5097,7 +5193,7 @@ document.addEventListener('DOMContentLoaded', function() {
       modalImg.src = this.src;
       modalImg.alt = this.alt;
       modalCaption.textContent = `${title} — ${subtitle}`;
-      document.body.style.overflow = 'hidden';
+      lockBodyScroll();
     });
   });
   
@@ -5105,23 +5201,15 @@ document.addEventListener('DOMContentLoaded', function() {
   if (closeBtn) {
     closeBtn.addEventListener('click', function() {
       modal.classList.remove('show');
-      document.body.style.overflow = '';
+      unlockBodyScroll();
     });
   }
   
-  // Close modal when clicking outside the image
+  // Close modal when clicking outside the image (on the overlay)
   modal.addEventListener('click', function(e) {
     if (e.target === modal) {
       modal.classList.remove('show');
-      document.body.style.overflow = '';
-    }
-  });
-  
-  // Close modal with Escape key
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && modal.classList.contains('show')) {
-      modal.classList.remove('show');
-      document.body.style.overflow = '';
+      unlockBodyScroll();
     }
   });
 
@@ -5179,20 +5267,20 @@ document.addEventListener('DOMContentLoaded', function() {
       // Close button handler
       modal.querySelector('.cert-modal-close').addEventListener('click', () => {
         modal.classList.remove('show');
-        document.body.style.overflow = '';
+        unlockBodyScroll();
       });
       
       // Overlay click handler
       modal.querySelector('.cert-modal-overlay').addEventListener('click', () => {
         modal.classList.remove('show');
-        document.body.style.overflow = '';
+        unlockBodyScroll();
       });
       
       // ESC key handler
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('show')) {
+      modal.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
           modal.classList.remove('show');
-          document.body.style.overflow = '';
+          unlockBodyScroll();
         }
       });
     }
@@ -5206,8 +5294,39 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Show modal
     modal.classList.add('show');
-    document.body.style.overflow = 'hidden';
+    lockBodyScroll();
+    // Trap focus: move focus into the close button
+    const closeBtn = modal.querySelector('.cert-modal-close');
+    if (closeBtn) closeBtn.focus();
   }
+
+  /* ===== GLOBAL ESC KEY HANDLER FOR ALL MODALS ===== */
+  document.addEventListener('keydown', function(e) {
+    if (e.key !== 'Escape') return;
+
+    // Certificate image modal
+    const certImgModal = document.getElementById('certificateModal');
+    if (certImgModal && certImgModal.classList.contains('show')) {
+      certImgModal.classList.remove('show');
+      unlockBodyScroll();
+      return;
+    }
+
+    // Service modal
+    const svcModal = document.getElementById('serviceModal');
+    if (svcModal && svcModal.classList.contains('show')) {
+      svcModal.classList.remove('show');
+      unlockBodyScroll();
+      return;
+    }
+
+    // Cert details modal
+    const certDetailsModal = document.getElementById('certDetailsModal');
+    if (certDetailsModal && certDetailsModal.classList.contains('show')) {
+      certDetailsModal.classList.remove('show');
+      unlockBodyScroll();
+    }
+  });
 });
   </script>
 </body>
